@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   margin: 0;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 20px 0;
   background-color: none;
   position: sticky;
   top: 0;
@@ -20,6 +20,10 @@ const HeaderContainer = styled.header`
 
 const LogoContainer = styled.div`
   display: flex;
+  box-shadow: 0 5px 8px 0 rgba(80, 85, 92, 0.25);
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
   align-items: center;
   gap: 12px;
 `;

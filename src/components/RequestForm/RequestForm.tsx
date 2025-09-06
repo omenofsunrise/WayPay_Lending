@@ -17,7 +17,7 @@ const RequestForm: React.FC = () => {
 
 const SecurityContainer = styled.section`
   width: 100%;
-  padding: 60px 20px;
+  padding: 80px 20px;
 `;
 
 export default RequestForm;

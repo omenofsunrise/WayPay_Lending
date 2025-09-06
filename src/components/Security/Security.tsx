@@ -65,7 +65,7 @@ const CertificateIcon = () => (
 
 const SecurityContainer = styled.section`
   width: 100%;
-  padding: 60px 20px;
+  margin-top: 80px;
 `;
 
 const SecurityWrapper = styled.div`

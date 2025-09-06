@@ -19,7 +19,7 @@ const HeroContainer = styled.section`
 `;
 
 const Title = styled.h1`
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: black;
   margin-bottom: 30px;

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
 
 const Container = styled.div`
@@ -22,34 +22,37 @@ const Form = styled.form`
 `;
 
 const FieldGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: relative;
+  margin-top: 20px;
 `;
 
-const Label = styled.label`
-  font-size: 2em;
-  font-weight: 400;
-  text-align: left;
-  color: black;
+const Label = styled.label<{ isFocused: boolean; hasValue: boolean }>`
+  position: absolute;
+  left: 16px;
+  top: ${props => (props.isFocused || props.hasValue ? '0' : '50%')};
+  transform: ${props => (props.isFocused || props.hasValue ? 'translateY(-50%)' : 'translateY(-50%)')};
+  font-size: ${props => (props.isFocused || props.hasValue ? '0.9em' : '1.5em')};
+  color: ${props => (props.isFocused ? '#007d88' : '#999')};
+  background: white;
+  padding: 0 4px;
+  transition: all 0.2s ease;
+  pointer-events: none;
 `;
 
 const Input = styled.input`
-  padding: 12px 16px;
+  padding: 16px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1.5em;
   transition: border-color 0.3s ease;
   color: black;
+  width: 100%;
+  box-sizing: border-box;
   
   &:focus {
     outline: none;
     border-color: #007d88;
     box-shadow: 0 0 0 2px rgba(0, 125, 136, 0.1);
-  }
-  
-  &::placeholder {
-    color: #999;
   }
 `;
 
@@ -69,11 +72,13 @@ interface RequestContainerProps {
 }
 
 const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className }) => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: ''
   });
+  
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,41 +94,70 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
     }));
   };
 
+  const handleFocus = (field: string) => () => {
+    setFocusedField(field);
+  };
+
+  const handleBlur = () => {
+    setFocusedField(null);
+  };
+
   return (
     <Container className={className}>
       <Form onSubmit={handleSubmit}>
         <FieldGroup>
-          <Label htmlFor="fullName">ФИО</Label>
+          <Label 
+            htmlFor="fullName" 
+            isFocused={focusedField === 'fullName'} 
+            hasValue={!!formData.fullName}
+          >
+            ФИО
+          </Label>
           <Input
             id="fullName"
             type="text"
-            placeholder="Введите ваше полное имя"
             value={formData.fullName}
             onChange={handleInputChange('fullName')}
+            onFocus={handleFocus('fullName')}
+            onBlur={handleBlur}
             required
           />
         </FieldGroup>
 
         <FieldGroup>
-          <Label htmlFor="email">Email</Label>
+          <Label 
+            htmlFor="email" 
+            isFocused={focusedField === 'email'} 
+            hasValue={!!formData.email}
+          >
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
-            placeholder="Введите ваш email"
             value={formData.email}
             onChange={handleInputChange('email')}
+            onFocus={handleFocus('email')}
+            onBlur={handleBlur}
             required
           />
         </FieldGroup>
 
         <FieldGroup>
-          <Label htmlFor="phone">Телефон</Label>
+          <Label 
+            htmlFor="phone" 
+            isFocused={focusedField === 'phone'} 
+            hasValue={!!formData.phone}
+          >
+            Телефон
+          </Label>
           <Input
             id="phone"
             type="tel"
-            placeholder="Введите ваш телефон"
             value={formData.phone}
             onChange={handleInputChange('phone')}
+            onFocus={handleFocus('phone')}
+            onBlur={handleBlur}
             required
           />
         </FieldGroup>

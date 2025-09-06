@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../buttons/Button';
+import Button from '../ui/buttons/Button';
 
 const HeaderContainer = styled.header`
   display: flex;
+  margin: 0;
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
@@ -11,6 +12,10 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
+  
+  @media (max-width: 768px) {
+    padding: 16px 20px;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -20,13 +25,21 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  height: 40px;
+  height: 50px;
   width: auto;
+  
+  @media (max-width: 768px) {
+    height: 32px;
+  }
 `;
 
 const LogoText = styled.img`
-  height: 30px;
+  height: 40px;
   width: auto;
+  
+  @media (max-width: 768px) {
+    height: 24px;
+  }
 `;
 
 const ButtonsContainer = styled.div`
@@ -58,6 +71,20 @@ const Header: React.FC<HeaderProps> = ({
   onPhoneClick,
   className
 }) => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkIsMobile();
+    
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   return (
     <HeaderContainer className={className}>
       <LogoContainer>
@@ -66,14 +93,20 @@ const Header: React.FC<HeaderProps> = ({
       </LogoContainer>
       
       <ButtonsContainer>
-        <Button onClick={onPhoneClick}>
-          <PhoneIcon />
-        </Button>
-        <Button 
-          onClick={onApplicationClick}
-        >
-          Оставить заявку
-        </Button>
+        {isMobile ? (
+          <Button onClick={onPhoneClick || onApplicationClick}>
+            <PhoneIcon />
+          </Button>
+        ) : (
+          <>
+            <Button onClick={onPhoneClick}>
+              <PhoneIcon />
+            </Button>
+            <Button onClick={onApplicationClick}>
+              Оставить заявку
+            </Button>
+          </>
+        )}
       </ButtonsContainer>
     </HeaderContainer>
   );

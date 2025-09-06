@@ -27,8 +27,8 @@ const Icon = styled.div`
   justify-content: center;
   margin-right: clamp(8px, 1.5vw, 12px);
   flex-shrink: 0;
-  width: clamp(25px, 10vw, 70px);
-  height: clamp(25px, 10vw, 70px);
+  width: clamp(25px, 10vw, 60px);
+  height: clamp(25px, 10vw, 60px);
   
   svg {
     fill: black;
@@ -43,7 +43,7 @@ const Icon = styled.div`
 `;
 
 const Title = styled.h3`
-  font-size: clamp(1.7rem, 4vw, 2rem);
+  font-size: clamp(1.7rem, 4vw, 1.8rem);
   font-weight: 600;
   color: black;
   line-height: 1.3;

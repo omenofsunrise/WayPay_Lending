@@ -65,7 +65,7 @@ const InterfaceForm: React.FC = () => {
     { src: '/videos/mobile-2.mp4', poster: 'mobile-photos/mobile-credits.jpg', title: 'Вы можете контролировать договоры прямо с телефона!' },
     { src: '/videos/mobile-3.mp4', poster: 'mobile-photos/mobile-payments.jpg', title: 'Можно предупредить клиента о платеже одним нажатием!' },
     { src: '/videos/mobile-1.mp4', poster: 'mobile-photos/mobile-calculator.jpg', title: 'У нас есть калькулятор рассрочек' },
-    { src: '/videos/mobile-4.mp4', poster: 'mobile-photos/mobile-todo.jpg', title: 'Теперь вам не обязательно даже вставать с кровати, чтобы контролировать рабочий процесс!' },
+    { src: '/videos/mobile-4.mp4', poster: 'mobile-photos/mobile-todo.jpg', title: 'Управление рабочими процессами доступно в режиме 24/7 с любого устройства.' },
     { src: '/videos/mobile-5.mp4', poster: 'mobile-photos/mobile-menu.jpg', title: 'Это лишь малая часть функционала мобильного приложения. Кроме того, у нас есть сайт WayPay CRM с основным функционалом' },
   ];
 
@@ -79,6 +79,7 @@ const InterfaceForm: React.FC = () => {
       <VideosContainer>
         {currentVideos.map((video, index) => (
           <VideoCard key={index}>
+            <VideoTitle>{video.title}</VideoTitle>
             <VideoWrapper $isMobile={isMobile}>
               <OptimizedVideo
                 ref={addVideoRef(index)}
@@ -91,7 +92,6 @@ const InterfaceForm: React.FC = () => {
                 $isMobile={isMobile}
               />
             </VideoWrapper>
-            <VideoTitle>{video.title}</VideoTitle>
           </VideoCard>
         ))}
       </VideosContainer>

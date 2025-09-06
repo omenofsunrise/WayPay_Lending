@@ -51,6 +51,7 @@ const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-left: auto;
 `;
 
 const PhoneIcon = () => (
@@ -77,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
   className
 }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   React.useEffect(() => {
     const checkIsMobile = () => {
@@ -108,12 +109,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <HeaderContainer className={className}>
-        <LogoContainer>
-          <Logo src="/Logo.svg" alt="Logo" />
-          <LogoText src="/LogoText.svg" alt="Company Name" />
-        </LogoContainer>
-        
+      <HeaderContainer className={className}>        
         <ButtonsContainer>
           {isMobile ? (
             <Button onClick={onPhoneClick || handleOpenModal}>

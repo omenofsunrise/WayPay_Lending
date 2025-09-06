@@ -27,6 +27,7 @@ const Title = styled.h1`
   @media (max-width: 768px) {
     font-size: 2rem;
     text-align: left;
+    margin-bottom: 15px;
   }
 `;
 
@@ -39,19 +40,19 @@ const ContentContainer = styled.div`
   max-width: 1200px;
   
   @media (max-width: 768px) {
-    padding: 10px;
+    padding: 25px 15px;
   }
 `;
 
 const Description = styled.p`
   color: rgba(80, 85, 92, 1);
-    font-size: 30px;
+  font-size: 30px;
 
   line-height: 1.6;
   margin: 0;
   
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
   }
 `;

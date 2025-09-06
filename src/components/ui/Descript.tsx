@@ -11,8 +11,13 @@ const StyledTitle = styled.h3`
   text-align: left;
   font-weight: 400;
   font-style: bold;
-  margin: 20px 0;
+  margin: 0;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    padding: 10px 5px;
+  }
 `;
 
 const Descript: React.FC<TitleProps> = ({ children, className }) => {

@@ -14,28 +14,28 @@ const PromoContainer = styled.div`
 
   @media (max-width: 768px) {
     border-radius: 16px;
-    padding: 20px 16px;
+    padding: 0 16px;
+    margin: 5px 20px;
   }
 
   @media (max-width: 480px) {
     border-radius: 12px;
-    padding: 16px 12px;
+    padding: 0 12px;
   }
 `;
 
 const Title = styled.h2`
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 700;
   margin-bottom: clamp(25px, 5vw, 34px);
 
   @media (max-width: 480px) {
-    font-size: 1.3rem;
     margin-bottom: 14px;
   }
 `;
 
 const Description = styled.p`
-  font-size: clamp(0.8rem, 3.2vw, 1.76rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.76rem);
   margin-bottom: clamp(12px, 2.5vw, 20px);
   line-height: 1.5;
   max-width: 800px;
@@ -45,7 +45,6 @@ const Description = styled.p`
   margin-right: auto;
 
   @media (max-width: 480px) {
-    font-size: 1.04rem;
     margin-bottom: 16px;
   }
 `;
@@ -55,11 +54,10 @@ const DaysCounter = styled.div`
   margin-bottom: clamp(12px, 2.5vw, 20px);
   display: inline-block;
   font-weight: 400;
-  font-size: clamp(0.8rem, 3.2vw, 1.76rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.76rem);
 
   @media (max-width: 480px) {
     padding: 10px 16px;
-    font-size: 0.85rem;
     border-radius: 12px;
   }
 `;

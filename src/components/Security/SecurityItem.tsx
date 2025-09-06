@@ -37,12 +37,9 @@ const Container = styled.div`
   width: 100%;
   min-height: 100px;
 
-  /* Мобильная версия - вертикальное расположение */
   @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    padding: 16px;
-    gap: 12px;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -54,14 +51,8 @@ const IconWrapper = styled.div`
   width: clamp(40px, 10vw, 60px);
   height: clamp(40px, 10vw, 60px);
 
-  /* Для иконок - центрирование на мобильных */
-  & > svg, & > img {
-    width: 100%;
-    height: 100%;
-  }
-
   @media (max-width: 768px) {
-    margin-bottom: 8px;
+    margin-left: 20px;
   }
 `;
 
@@ -70,10 +61,8 @@ const TextContent = styled.div`
   flex-direction: column;
   gap: clamp(4px, 1vw, 8px);
   text-align: left;
-  width: 100%;
 
   @media (max-width: 768px) {
-    text-align: center;
     gap: 6px;
   }
 `;

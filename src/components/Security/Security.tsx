@@ -64,8 +64,11 @@ const CertificateIcon = () => (
 );
 
 const SecurityContainer = styled.section`
-  width: 100%;
   margin-top: 80px;
+
+  @media (max-width: 768px) {
+    margin: 25px 20px;
+  }
 `;
 
 const SecurityWrapper = styled.div`

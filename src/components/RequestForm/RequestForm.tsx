@@ -16,11 +16,14 @@ const RequestForm: React.FC = () => {
 };
 
 const SecurityContainer = styled.section`
-  width: 100%;
   padding: 80px 20px;
-  
+
   @media (max-width: 768px) {
-    padding: 80px 0;
+    white-space: normal;
+    text-overflow: clip;
+    overflow: visible;
+    padding: 0 20px;
+    margin: 5px 20px 34px 20px;
   }
 `;
 

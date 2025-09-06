@@ -4,7 +4,11 @@ import InfoCard from './InfoCard';
 import Title from '../ui/Title';
 
 const SectionContainer = styled.section`
-  margin: 30px 30px;
+  margin: 30px 0;
+
+  @media (max-width: 768px) {
+    margin: 30px 20px;
+  }
 `;
 
 const AdvantagesGrid = styled.div`
@@ -14,6 +18,7 @@ const AdvantagesGrid = styled.div`
   margin-top: 40px;
   
   @media (max-width: 768px) {
+    margin-top: 20px;
     grid-template-columns: 1fr;
   }
 `;

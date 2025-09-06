@@ -16,7 +16,7 @@ const StyledTitle = styled.h1`
 
   @media (max-width: 768px) {
     font-size: 2rem;
-    padding: 0 20px;
+    padding: 0 5px;
   }
 `;
 

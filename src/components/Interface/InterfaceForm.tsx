@@ -98,9 +98,7 @@ const InterfaceForm: React.FC = () => {
 };
 
 const SecurityContainer = styled.section`
-  padding: 80px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 80px 0;
 
   @media (max-width: 768px) {
     padding: 40px 15px;

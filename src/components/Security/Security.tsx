@@ -88,11 +88,6 @@ const IconWrapper = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  svg {
-    width: 60px;
-    height: auto;
-  }
 `;
 
 export default Security;

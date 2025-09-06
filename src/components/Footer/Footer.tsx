@@ -181,7 +181,6 @@ const IconWrapper = styled.span`
   }
 `;
 
-// Иконки как SVG компоненты для лучшего отображения
 const PhoneIcon = () => (
   <IconWrapper>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -223,11 +222,11 @@ const Footer: React.FC = () => {
           <ContactSection>
             <ContactItem href="tel:+78001234567">
               <PhoneIcon />
-              +7 (800) 123-45-67
+              +7 989 924 24 24
             </ContactItem>
             <ContactItem href="mailto:info@example.com">
               <EmailIcon />
-              info@example.com
+              ya@eliphanov.ru
             </ContactItem>
           </ContactSection>
         </MainContent>

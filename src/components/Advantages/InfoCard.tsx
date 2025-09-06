@@ -27,18 +27,23 @@ const Icon = styled.div`
   justify-content: center;
   margin-right: clamp(8px, 1.5vw, 12px);
   flex-shrink: 0;
-  width: clamp(50px, 10vw, 70px);
-  height: clamp(50px, 10vw, 70px);
+  width: clamp(25px, 10vw, 70px);
+  height: clamp(25px, 10vw, 70px);
   
   svg {
     fill: black;
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 480px) {
+    width: clamp(15px, 5vw, 30px);
+    height: clamp(15px, 5vw, 30px);
+  }
 `;
 
 const Title = styled.h3`
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-size: clamp(1.7rem, 4vw, 2rem);
   font-weight: 600;
   color: black;
   line-height: 1.3;
@@ -49,6 +54,7 @@ const Title = styled.h3`
   @media (max-width: 480px) {
     margin-left: 0;
     text-align: center;
+    font-size: clamp(1.2rem, 4vw, 2rem);
   }
 `;
 

@@ -11,7 +11,7 @@ const getDaysUntilNewYear = (): number => {
 };
 
 const HeroContainer = styled.section`
-  padding: 40px 20px;
+  padding: 40px 0;
   text-align: center;
   @media (max-width: 768px) {
     padding: 0 20px;
@@ -36,8 +36,6 @@ const ContentContainer = styled.div`
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  max-width: 1200px;
   
   @media (max-width: 768px) {
     padding: 25px 15px;

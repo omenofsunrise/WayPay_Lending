@@ -36,10 +36,18 @@ const Container = styled.div`
   border-radius: clamp(12px, 3vw, 20px);
   width: 100%;
   min-height: 100px;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
-    padding: 0;
-    margin: 0;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+    min-height: auto;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 12px;
   }
 `;
 
@@ -51,8 +59,21 @@ const IconWrapper = styled.div`
   width: clamp(40px, 10vw, 60px);
   height: clamp(40px, 10vw, 60px);
 
+  svg {
+    fill: black;
+    width: 100%;
+    height: 100%;
+  }
+
   @media (max-width: 768px) {
-    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    margin-left: 0;
+  }
+
+  @media (max-width: 480px) {
+    width: 30px;
+    height: 30px;
   }
 `;
 
@@ -61,6 +82,7 @@ const TextContent = styled.div`
   flex-direction: column;
   gap: clamp(4px, 1vw, 8px);
   text-align: left;
+  flex: 1;
 
   @media (max-width: 768px) {
     gap: 6px;
@@ -69,42 +91,41 @@ const TextContent = styled.div`
 
 const Title = styled.h3`
   color: black;
-  font-size: clamp(18px, 4vw, 30px);
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: 600;
   line-height: 1.2;
   margin: 0;
   padding: 0;
   word-wrap: break-word;
 
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+
   @media (max-width: 480px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 `;
 
 const Description = styled.p`
   color: rgba(80, 85, 92, 1);
-  font-size: clamp(14px, 3vw, 20px);
+  font-size: clamp(14px, 3vw, 16px);
   line-height: 1.4;
   margin: 0;
   padding: 0;
   word-wrap: break-word;
   
-  /* Убираем nowrap для мобильных */
-  @media (max-width: 768px) {
-    white-space: normal;
-    text-overflow: clip;
-    overflow: visible;
-  }
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
 
-  /* Для десктопа сохраняем ellipsis */
-  @media (min-width: 769px) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 1.3;
   }
 
   @media (max-width: 480px) {
-    font-size: 16px;
+    font-size: 13px;
     line-height: 1.3;
   }
 `;

@@ -103,9 +103,6 @@ const Header: React.FC<HeaderProps> = ({
           </Button>
         ) : (
           <>
-            <Button onClick={onPhoneClick}>
-              <PhoneIcon />
-            </Button>
             <Button onClick={onApplicationClick}>
               Оставить заявку
             </Button>

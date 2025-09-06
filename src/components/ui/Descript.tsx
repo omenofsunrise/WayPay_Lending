@@ -11,7 +11,7 @@ const StyledTitle = styled.h3`
   text-align: left;
   font-weight: 400;
   font-style: bold;
-  margin: 0;
+  margin: 10px 0 25px;
   padding: 0;
 
   @media (max-width: 768px) {

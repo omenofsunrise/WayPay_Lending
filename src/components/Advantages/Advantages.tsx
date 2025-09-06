@@ -4,7 +4,7 @@ import InfoCard from './InfoCard';
 import Title from '../ui/Title';
 
 const SectionContainer = styled.section`
-  margin: 30px 0;
+  margin: 30px 30px;
 `;
 
 const AdvantagesGrid = styled.div`

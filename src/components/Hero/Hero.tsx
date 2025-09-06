@@ -11,8 +11,11 @@ const getDaysUntilNewYear = (): number => {
 };
 
 const HeroContainer = styled.section`
-  padding: 60px 20px;
+  padding: 40px 20px;
   text-align: center;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const Title = styled.h1`
@@ -23,6 +26,7 @@ const Title = styled.h1`
   
   @media (max-width: 768px) {
     font-size: 2rem;
+    text-align: left;
   }
 `;
 
@@ -33,6 +37,10 @@ const ContentContainer = styled.div`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   max-width: 1200px;
+  
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Description = styled.p`
@@ -44,6 +52,7 @@ const Description = styled.p`
   
   @media (max-width: 768px) {
     font-size: 1rem;
+    margin-bottom: 10px;
   }
 `;
 
@@ -53,7 +62,7 @@ const PromotionText = styled.div`
   font-size: 2rem;
   
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    display: none;
   }
 `;
 

@@ -13,6 +13,11 @@ const StyledTitle = styled.h1`
   font-style: bold;
   margin: 0;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    padding: 0 20px;
+  }
 `;
 
 const Title: React.FC<TitleProps> = ({ children, className }) => {

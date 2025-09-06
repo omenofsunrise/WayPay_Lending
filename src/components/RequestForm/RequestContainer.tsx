@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
 
 const Container = styled.div`
@@ -7,12 +7,7 @@ const Container = styled.div`
   border-radius: 10px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 50%;
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 90%;
-  }
 `;
 
 const Form = styled.form`
@@ -62,6 +57,36 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
+const Message = styled.div<{ isError?: boolean }>`
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  background: ${props => props.isError ? '#ffebee' : '#e8f5e8'};
+  color: ${props => props.isError ? '#c62828' : '#2e7d32'};
+  text-align: center;
+`;
+
+const LoadingSpinner = styled.div`
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007d88;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const ButtonContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 interface RequestContainerProps {
   onSubmit?: (data: {
     fullName: string;
@@ -69,6 +94,11 @@ interface RequestContainerProps {
     phone: string;
   }) => void;
   className?: string;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message?: string;
 }
 
 const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className }) => {
@@ -79,9 +109,48 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
   });
   
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('https://web.waypay.one:5002/api/Feedback/submit-application', {
+        method: 'POST',
+        headers: {
+          'accept': '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const result: ApiResponse = await response.json();
+        setMessage({
+          text: result.message || 'Заявка успешно отправлена!',
+          isError: false
+        });
+        setFormData({ fullName: '', email: '', phone: '' });
+      } else {
+        const errorData = await response.json().catch(() => null);
+        setMessage({
+          text: errorData?.message || `Ошибка ${response.status}: ${response.statusText}`,
+          isError: true
+        });
+      }
+    } catch (error) {
+      setMessage({
+        text: 'Ошибка сети. Проверьте подключение к интернету.',
+        isError: true
+      });
+    } finally {
+      setIsLoading(false);
+    }
+
+    // Вызываем переданный колбэк, если он есть
     onSubmit?.(formData);
   };
 
@@ -121,6 +190,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
             onFocus={handleFocus('fullName')}
             onBlur={handleBlur}
             required
+            disabled={isLoading}
           />
         </FieldGroup>
 
@@ -140,6 +210,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
             onFocus={handleFocus('email')}
             onBlur={handleBlur}
             required
+            disabled={isLoading}
           />
         </FieldGroup>
 
@@ -159,14 +230,27 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
             onFocus={handleFocus('phone')}
             onBlur={handleBlur}
             required
+            disabled={isLoading}
           />
         </FieldGroup>
 
         <ButtonContainer>
-          <GradientButton type="submit">
-            Отправить заявку
+          <GradientButton 
+            type="submit" 
+            disabled={isLoading}
+          >
+            <ButtonContent>
+              {isLoading && <LoadingSpinner />}
+              {isLoading ? 'Отправка...' : 'Отправить заявку'}
+            </ButtonContent>
           </GradientButton>
         </ButtonContainer>
+
+        {message && (
+          <Message isError={message.isError}>
+            {message.text}
+          </Message>
+        )}
       </Form>
     </Container>
   );

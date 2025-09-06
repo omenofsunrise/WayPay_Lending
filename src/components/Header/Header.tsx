@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
+import RequestModal from '../ui/Request';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -75,7 +76,8 @@ const Header: React.FC<HeaderProps> = ({
   onPhoneClick,
   className
 }) => {
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   React.useEffect(() => {
     const checkIsMobile = () => {
@@ -89,27 +91,51 @@ const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    if (onApplicationClick) {
+      onApplicationClick();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitForm = (data: { fullName: string; email: string; phone: string }) => {
+    console.log('Данные формы:', data);
+  };
+
   return (
-    <HeaderContainer className={className}>
-      <LogoContainer>
-        <Logo src="/Logo.svg" alt="Logo" />
-        <LogoText src="/LogoText.svg" alt="Company Name" />
-      </LogoContainer>
-      
-      <ButtonsContainer>
-        {isMobile ? (
-          <Button onClick={onPhoneClick || onApplicationClick}>
-            <PhoneIcon />
-          </Button>
-        ) : (
-          <>
-            <Button onClick={onApplicationClick}>
-              Оставить заявку
+    <>
+      <HeaderContainer className={className}>
+        <LogoContainer>
+          <Logo src="/Logo.svg" alt="Logo" />
+          <LogoText src="/LogoText.svg" alt="Company Name" />
+        </LogoContainer>
+        
+        <ButtonsContainer>
+          {isMobile ? (
+            <Button onClick={onPhoneClick || handleOpenModal}>
+              <PhoneIcon />
             </Button>
-          </>
-        )}
-      </ButtonsContainer>
-    </HeaderContainer>
+          ) : (
+            <>
+              <Button onClick={handleOpenModal}>
+                Оставить заявку
+              </Button>
+            </>
+          )}
+        </ButtonsContainer>
+      </HeaderContainer>
+
+      <RequestModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitForm}
+        title="Оставить заявку"
+      />
+    </>
   );
 };
 

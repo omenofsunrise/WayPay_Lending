@@ -51,21 +51,22 @@ const InterfaceForm: React.FC = () => {
   }, [isMobile]);
 
   const desktopVideos: VideoItem[] = [
-    { src: 'calculator.mp4', poster: '/photos/calculator.png', title: 'Наш калькулятор рассрочек' },
     { src: 'calculator.', poster: '/photos/empty_clients.png', title: 'Поиск по базе из более тысячи клиентов!' },
     { src: 'calculator.', poster: '/photos/clients.png', title: 'Клиент не сможет скрыть свои задолженности и текущие рассрочки!' },
-    { src: 'calculator.', poster: '/photos/client_dossier.png', title: 'Подробные резюме на каждого клиента собирается с помощью краудсорсинга!' },
+    { src: 'calculator.', poster: '/photos/client_dossier.png', title: 'Подробные досье на каждого клиента собирается с помощью краудсорсинга!' },
+    { src: 'calculator.mp4', poster: '/photos/calculator.png', title: 'Наш калькулятор рассрочек' },
     { src: 'calculator.', poster: '/photos/pin-code.png', title: 'Сайт спроектирован так, чтобы обеспечивать одновременно и безопасность и удобство!' },
     { src: 'calculator.', poster: '/photos/analityc.png', title: 'Подробная аналитика по всем необходимым показателям!' },
-    { src: 'calculator.', poster: '/photos/employee_statistic.png', title: 'А также статистика по сотрудникам и многое другое!' }
+    { src: 'calculator.', poster: '/photos/employee_statistic.png', title: 'Статистика по сотрудникам и многое другое!' },
+    { src: 'calculator.', poster: 'mobile-photos/mobile-menu.jpg', title: 'А ещё, для вашего удобства мы сделали мобильное приложение' }
   ];
 
   const mobileVideos: VideoItem[] = [
-    { src: '/videos/mobile-1.mp4', poster: 'mobile-photos/mobile-calculator.jpg', title: 'Калькулятор рассрочек' },
-    { src: '/videos/mobile-2.mp4', poster: 'mobile-photos/mobile-credits.jpg', title: 'Окно договоров' },
-    { src: '/videos/mobile-3.mp4', poster: 'mobile-photos/mobile-payments.jpg', title: 'Окно ожидаемых платежей' },
-    { src: '/videos/mobile-4.mp4', poster: 'mobile-photos/mobile-todo.jpg', title: 'Туду лист для контроля задач сотрудников' },
-    { src: '/videos/mobile-5.mp4', poster: 'mobile-photos/mobile-menu.jpg', title: '' },
+    { src: '/videos/mobile-1.mp4', poster: 'mobile-photos/mobile-calculator.jpg', title: 'Наш калькулятор рассрочек' },
+    { src: '/videos/mobile-2.mp4', poster: 'mobile-photos/mobile-credits.jpg', title: 'Вы можете контролировать договоры прямо с телефона!' },
+    { src: '/videos/mobile-3.mp4', poster: 'mobile-photos/mobile-payments.jpg', title: 'Можно предупредить клиента о платеже одним нажатием!' },
+    { src: '/videos/mobile-4.mp4', poster: 'mobile-photos/mobile-todo.jpg', title: 'Теперь вам не обязательно с кровати, чтобы контролировать рабочий процесс!' },
+    { src: '/videos/mobile-5.mp4', poster: 'mobile-photos/mobile-menu.jpg', title: 'Это лишь малая часть функционала мобильного приложения. Кроме того, у нас есть сайт WayPay CRM с основным функционалом' },
   ];
 
   const currentVideos = isMobile ? mobileVideos : desktopVideos;
@@ -78,7 +79,7 @@ const InterfaceForm: React.FC = () => {
       <VideosContainer>
         {currentVideos.map((video, index) => (
           <VideoCard key={index}>
-            <VideoWrapper>
+            <VideoWrapper $isMobile={isMobile}>
               <OptimizedVideo
                 ref={addVideoRef(index)}
                 src={video.src}
@@ -87,18 +88,24 @@ const InterfaceForm: React.FC = () => {
                 muted
                 playsInline
                 preload="metadata"
+                $isMobile={isMobile}
               />
             </VideoWrapper>
             <VideoTitle>{video.title}</VideoTitle>
           </VideoCard>
         ))}
       </VideosContainer>
+      
+      <Disclaimer>
+        *Обращаем ваше внимание, что все данные, представленные на скриншотах и видео, являются демонстрационными и не содержат реальной информации о клиентах.
+      </Disclaimer>
     </SecurityContainer>
   );
 };
 
 const SecurityContainer = styled.section`
   padding: 80px 0;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 40px 15px;
@@ -125,7 +132,7 @@ const VideoCard = styled.div`
   width: 100%;
 `;
 
-const VideoWrapper = styled.div`
+const VideoWrapper = styled.div<{ $isMobile: boolean }>`
   position: relative;
   border-radius: 16px;
   overflow: hidden;
@@ -133,17 +140,29 @@ const VideoWrapper = styled.div`
   transition: transform 0.3s ease;
   background: #f5f5f5;
   width: 100%;
+  
+  ${props => !props.$isMobile && `
+    max-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `}
 
   &:hover {
     transform: translateY(-4px);
   }
 `;
 
-const OptimizedVideo = styled.video`
+const OptimizedVideo = styled.video<{ $isMobile: boolean }>`
   width: 100%;
   height: auto;
   display: block;
   border-radius: 16px;
+  
+  ${props => !props.$isMobile && `
+    max-height: 600px;
+    object-fit: contain;
+  `}
 `;
 
 const VideoTitle = styled.h3`
@@ -155,6 +174,21 @@ const VideoTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 18px;
+  }
+`;
+
+const Disclaimer = styled.p`
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 60px;
+  font-style: italic;
+  padding: 0 20px;
+  line-height: 1.5;
+
+  @media (max-width: 768px) {
+    margin-top: 40px;
+    font-size: 12px;
   }
 `;
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
+import RequestModal from '../ui/Request';
 
 const PromoContainer = styled.div`
   background: linear-gradient(160deg, rgba(0, 125, 136, 1), rgba(37, 203, 161, 1));
@@ -86,24 +87,48 @@ const getDaysUntilNewYear = (): number => {
 const PromoBlock: React.FC<PromoBlockProps> = ({
   onButtonClick,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const daysLeft = getDaysUntilNewYear();
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    if (onButtonClick) {
+      onButtonClick();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitForm = (data: { fullName: string; email: string; phone: string }) => {
+    console.log('Данные формы из промо-блока:', data);
+  };
+
   return (
-    <PromoContainer>
-      <Title>Специальное предложение!</Title>
-      <Description>
-        Все новые клиенты до 1 января получат бесплатный доступ к WayPay на 2 месяца!
-      </Description>
-      <DaysCounter>
-        Осталось <BoldDays>{daysLeft} дней</BoldDays> до конца акции
-      </DaysCounter>
-      <ButtonContainer>
-        <Button
-          onClick={onButtonClick}
-        >
-          Оставить заявку
-        </Button>
-      </ButtonContainer>
-    </PromoContainer>
+    <>
+      <PromoContainer>
+        <Title>Специальное предложение!</Title>
+        <Description>
+          Все новые клиенты до 1 января получат бесплатный доступ к WayPay на 2 месяца!
+        </Description>
+        <DaysCounter>
+          Осталось <BoldDays>{daysLeft} дней</BoldDays> до конца акции
+        </DaysCounter>
+        <ButtonContainer>
+          <Button onClick={handleOpenModal}>
+            Оставить заявку
+          </Button>
+        </ButtonContainer>
+      </PromoContainer>
+
+      <RequestModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitForm}
+        title="Получить специальное предложение"
+      />
+    </>
   );
 };
 

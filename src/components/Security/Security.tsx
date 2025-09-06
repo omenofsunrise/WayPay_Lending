@@ -75,7 +75,7 @@ const SecurityWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 40px;
 
   @media (max-width: 768px) {

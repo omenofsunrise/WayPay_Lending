@@ -220,11 +220,11 @@ const Footer: React.FC = () => {
           </LogoSection>
 
           <ContactSection>
-            <ContactItem href="tel:+78001234567">
+            <ContactItem href="tel:+79899242424">
               <PhoneIcon />
               +7 989 924 24 24
             </ContactItem>
-            <ContactItem href="mailto:info@example.com">
+            <ContactItem href="mailto:ya@eliphanov.ru">
               <EmailIcon />
               ya@eliphanov.ru
             </ContactItem>

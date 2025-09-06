@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
+import RequestModal from '../ui/Request';
 
 const getDaysUntilNewYear = (): number => {
   const now = new Date();
@@ -45,7 +46,6 @@ const ContentContainer = styled.div`
 const Description = styled.p`
   color: rgba(80, 85, 92, 1);
   font-size: 30px;
-
   line-height: 1.6;
   margin: 0;
   
@@ -70,26 +70,50 @@ const DaysHighlight = styled.span`
 `;
 
 const Hero: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const daysLeft = getDaysUntilNewYear();
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitForm = (data: { fullName: string; email: string; phone: string }) => {
+    console.log('Данные формы из героя:', data);
+  };
+
   return (
-    <HeroContainer>
-      <Title>Удобное хранение договоров</Title>
-      
-      <ContentContainer>
-        <Description>
-          WayPay - современное решение для автоматизации учёта рассрочек, 
-          клиентов и финансов вашего бизнеса. Переходите на цифровой формат 
-          работы уже сегодня!
-        </Description>
+    <>
+      <HeroContainer>
+        <Title>Удобное хранение договоров</Title>
         
-        <PromotionText>
-          Осталось <DaysHighlight>{daysLeft} дней</DaysHighlight> до конца акции
-        </PromotionText>
-        
-        <GradientButton>Узнать больше</GradientButton>
-      </ContentContainer>
-    </HeroContainer>
+        <ContentContainer>
+          <Description>
+            WayPay - современное решение для автоматизации учёта рассрочек, 
+            клиентов и финансов вашего бизнеса. Переходите на цифровой формат 
+            работы уже сегодня!
+          </Description>
+          
+          <PromotionText>
+            Осталось <DaysHighlight>{daysLeft} дней</DaysHighlight> до конца акции
+          </PromotionText>
+          
+          <GradientButton onClick={handleOpenModal}>
+            Узнать больше
+          </GradientButton>
+        </ContentContainer>
+      </HeroContainer>
+
+      <RequestModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitForm}
+        title="Узнать больше о WayPay"
+      />
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ const StyledTitle = styled.h1<{ $color?: string }>`
 
   @media (max-width: 768px) {
     font-size: 1.7rem;
-    padding: 0 5px;
+    padding: 0 10px;
   }
 `;
 

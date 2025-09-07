@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Title from '../ui/Title';
+import { useMediaQuery } from 'react-responsive';
 
 const HeroContainer = styled.section`
-  padding: 50px 20px 50px 0;
+  padding: 50px 200px 50px 0;
   background: white;
   position: relative;
   overflow: hidden;
@@ -21,6 +22,7 @@ const HeroContent = styled.div`
   max-width: 1920px;
   margin: 0 auto;
   padding-top: 20px;
+  
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -42,6 +44,8 @@ const ImageContainer = styled.div`
     justify-content: center;
     margin-bottom: 30px;
     width: 100%;
+    max-width: 100%;
+    margin-left: -20%;
   }
 `;
 
@@ -58,7 +62,7 @@ const MacbookImage = styled.img`
 const ContentContainer = styled.div`
   text-align: left;
   z-index: 2;
-  padding: 20px;
+  padding: 20px 0 20px 20px;
   flex: 1;
   
   @media (max-width: 1024px) {
@@ -98,6 +102,7 @@ const FeaturesGrid = styled.div`
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    padding: 10px;
   }
 `;
 
@@ -106,13 +111,19 @@ const FeatureBox = styled.div`
   border-radius: 20px;
   padding: 20px;
   background: white;
+
+  @media (max-width: 768px) {
+    border: none;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(0, 125, 136, 0.1);
+  }
 `;
 
 const FeatureTitle = styled.h3`
   font-size: 36px;
   font-weight: 600;
   text-align: center;
-  color: #black;
+  color: black;
   margin: 0 0 15px;
 
   @media (max-width: 1024px) {
@@ -128,7 +139,7 @@ const FeatureDescription = styled.p`
   text-align: center;
   font-size: 22px;
   font-weight: 400;
-  color: #black;
+  color: black;
   line-height: 1.4;
   
   @media (max-width: 1024px) {
@@ -141,44 +152,90 @@ const FeatureDescription = styled.p`
 `;
 
 const Mobile: React.FC = () => {
-  return (
-      <HeroContainer>
-          <Title>Мобильный CRM для вашей эффективности</Title>
-          <HeroContent>
-            <ImageContainer>
-              <MacbookImage 
-                src="/Images/mobile.png" 
-                alt="WayPay на телефоне" 
-              />
-            </ImageContainer>
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
-            <ContentContainer>
-              <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
+  if (isMobile) {
+    // Рендеринг для мобильных устройств
+    return (
+      <HeroContainer>
+        <Title>Мобильный CRM для вашей эффективности</Title>
+        <HeroContent>
+          <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
+          
+          <ImageContainer>
+            <MacbookImage 
+              src="/Images/mobile.png" 
+              alt="WayPay на телефоне" 
+            />
+          </ImageContainer>
+
+          <ContentContainer>
+            <FeaturesGrid>
+              <FeatureBox>
+                <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
+                <FeatureDescription>Никакой потери данных и всегда актуальная информация под рукой, где бы вы ни были.</FeatureDescription>
+              </FeatureBox>
               
-              <FeaturesGrid>
-                <FeatureBox>
-                  <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
-                  <FeatureDescription>Никакой потери данных и всегда актуальная информация под рукой, где бы вы ни были.</FeatureDescription>
-                </FeatureBox>
-                
-                <FeatureBox>
-                  <FeatureTitle>Мгновенные push-уведомления</FeatureTitle>
-                  <FeatureDescription>Моментальные оповещения о новых лидах, смене статуса сделки, просроченных задачах или комментариях коллег.</FeatureDescription>
-                </FeatureBox>
-                
-                <FeatureBox>
-                  <FeatureTitle>Мобильная отчетность и дашборды</FeatureTitle>
-                  <FeatureDescription>Смотрите ключевые показатели по рассрочкам, выполняйте план и отслеживайте динамику в простых и наглядных графиках прямо с телефона.</FeatureDescription>
-                </FeatureBox>
-                
-                <FeatureBox>
-                  <FeatureTitle>Легкое делегирование задач коллегам</FeatureTitle>
-                  <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
-                </FeatureBox>
-              </FeaturesGrid>
-            </ContentContainer>
-          </HeroContent>
+              <FeatureBox>
+                <FeatureTitle>Мгновенные push-уведомления</FeatureTitle>
+                <FeatureDescription>Моментальные оповещения о новых лидах, смене статуса сделки, просроченных задачах или комментариях коллег.</FeatureDescription>
+              </FeatureBox>
+              
+              <FeatureBox>
+                <FeatureTitle>Мобильная отчетность и дашборды</FeatureTitle>
+                <FeatureDescription>Смотрите ключевые показатели по рассрочкам, выполняйте план и отслеживайте динамику в простых и наглядных графиках прямо с телефона.</FeatureDescription>
+              </FeatureBox>
+              
+              <FeatureBox>
+                <FeatureTitle>Легкое делегирование задач коллегам</FeatureTitle>
+                <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
+              </FeatureBox>
+            </FeaturesGrid>
+          </ContentContainer>
+        </HeroContent>
       </HeroContainer>
+    );
+  }
+
+  // Рендеринг для десктопных устройств
+  return (
+    <HeroContainer>
+      <Title>Мобильный CRM для вашей эффективности</Title>
+      <HeroContent>
+        <ImageContainer>
+          <MacbookImage 
+            src="/Images/mobile.png" 
+            alt="WayPay на телефоне" 
+          />
+        </ImageContainer>
+
+        <ContentContainer>
+          <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
+          
+          <FeaturesGrid>
+            <FeatureBox>
+              <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
+              <FeatureDescription>Никакой потери данных и всегда актуальная информация под рукой, где бы вы ни были.</FeatureDescription>
+            </FeatureBox>
+            
+            <FeatureBox>
+              <FeatureTitle>Мгновенные push-уведомления</FeatureTitle>
+              <FeatureDescription>Моментальные оповещения о новых лидах, смене статуса сделки, просроченных задачах или комментариях коллег.</FeatureDescription>
+            </FeatureBox>
+            
+            <FeatureBox>
+              <FeatureTitle>Мобильная отчетность и дашборды</FeatureTitle>
+              <FeatureDescription>Смотрите ключевые показатели по рассрочкам, выполняйте план и отслеживайте динамику в простых и наглядных графиках прямо с телефона.</FeatureDescription>
+            </FeatureBox>
+            
+            <FeatureBox>
+              <FeatureTitle>Легкое делегирование задач коллегам</FeatureTitle>
+              <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
+            </FeatureBox>
+          </FeaturesGrid>
+        </ContentContainer>
+      </HeroContent>
+    </HeroContainer>
   );
 };
 

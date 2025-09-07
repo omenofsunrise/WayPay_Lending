@@ -50,6 +50,7 @@ const LeftSection = styled.div`
   @media (max-width: 768px) {
     align-items: center;
     text-align: center;
+    order: 2;
   }
 `;
 
@@ -98,7 +99,7 @@ const SecurityContainer = styled.section`
     white-space: normal;
     text-overflow: clip;
     overflow: visible;
-    padding: 40px 0;
+    padding: 40px 0 0;
     margin: 0;
   }
 `;

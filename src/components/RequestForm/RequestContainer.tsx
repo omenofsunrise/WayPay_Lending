@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
+import Button from '../ui/buttons/Button';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -16,6 +17,10 @@ const Form = styled.form`
 const FieldGroup = styled.div`
   position: relative;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 10px;
+  }
 `;
 
 const Row = styled.div`
@@ -43,7 +48,7 @@ const Label = styled.label<{ isFocused: boolean; hasValue: boolean; isComment?: 
   }};
   transform: ${props => (props.isFocused || props.hasValue) ? 'translateY(-50%)' : 'translateY(-50%)'};
   font-size: ${props => (props.isFocused || props.hasValue) ? '0.9em' : '1.5em'};
-  color: ${props => (props.isFocused ? '#ffceceff' : '#999')};
+  color: ${props => (props.isFocused ? '#50555C' : '#999')};
   padding: 0 4px;
   transition: all 0.2s ease;
   pointer-events: none;
@@ -129,6 +134,19 @@ const OptionalText = styled.span`
   font-size: 0.8em;
   margin-left: 4px;
   font-weight: normal;
+`;
+
+const ApplyButton = styled(Button)`
+  background: none;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  box-shadow: none;
+  font-size: 20px;
+  margin: 0 10px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }  
 `;
 
 interface RequestContainerProps {
@@ -302,7 +320,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
         </FieldGroup>
 
         <ButtonContainer>
-          <GradientButton 
+          <ApplyButton
             type="submit" 
             disabled={isLoading}
           >
@@ -310,7 +328,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
               {isLoading && <LoadingSpinner />}
               {isLoading ? 'Отправка...' : 'Отправить заявку'}
             </ButtonContent>
-          </GradientButton>
+          </ApplyButton>
         </ButtonContainer>
 
         {message && (

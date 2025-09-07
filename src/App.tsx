@@ -28,6 +28,20 @@ function App() {
             </>
           } />
           
+          <Route path="*" element={
+            <>
+              <Header />
+              <div className="main-content">
+                <Hero />
+                <Advantages />
+                <Security />
+                <Mobile />
+                <RequestForm />
+              </div>
+              <Footer />
+            </>
+            } />
+
           <Route path="/privacy" element={
             <>
               <Header />

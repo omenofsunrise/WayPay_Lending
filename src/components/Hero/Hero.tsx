@@ -8,7 +8,7 @@ const HeroContainer = styled.section`
   overflow: hidden;
   
   @media (max-width: 768px) {
-    padding: 40px 0;
+    padding: 40px 0 0;
   }
 `;
 
@@ -30,6 +30,7 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   z-index: 1;
+  order: 1;
   
   @media (max-width: 1024px) {
     flex: 0 0 55%;
@@ -40,6 +41,7 @@ const ImageContainer = styled.div`
     justify-content: center;
     margin-bottom: 30px;
     width: 100%;
+    order: 2; // Порядок на мобильных: первый
   }
 `;
 
@@ -59,6 +61,7 @@ const TextContainer = styled.div`
   z-index: 2;
   margin-left: -7%;
   margin-top: -10%;
+  order: 2;
   
   @media (max-width: 1024px) {
     flex: 0 0 45%;
@@ -66,11 +69,21 @@ const TextContainer = styled.div`
   }
   
   @media (max-width: 768px) {
-    flex: 0 0 auto;
-    margin-left: 0;
+    flex: 1;
+    margin: 0 auto;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
     text-align: center;
+    order: 1;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0;
+    margin-top: 0;
+  }
+  
+  @media (max-width: 360px) {
+    padding: 0;
   }
 `;
 
@@ -93,6 +106,7 @@ const Title = styled.h1`
   
   @media (max-width: 1024px) {
     font-size: 38px;
+    margin-bottom: 25px;
   }
   
   @media (max-width: 900px) {
@@ -100,13 +114,34 @@ const Title = styled.h1`
   }
   
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     text-align: center;
+    margin-top: 20px;
+    line-height: 1.3;
+    padding: 0 10px;
+  }
+  
+  @media (max-width: 640px) {
+    font-size: 2rem;
+    margin-bottom: 18px;
   }
   
   @media (max-width: 480px) {
     font-size: 1.8rem;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    line-height: 1.25;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
   }
 `;
 
@@ -127,6 +162,7 @@ const Description = styled.p`
   
   @media (max-width: 1024px) {
     font-size: 20px;
+    margin-bottom: 25px;
   }
   
   @media (max-width: 900px) {
@@ -134,8 +170,33 @@ const Description = styled.p`
   }
   
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-align: center;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  @media (max-width: 640px) {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 375px) {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    line-height: 1.35;
   }
 `;
 
@@ -149,7 +210,6 @@ const Hero: React.FC = () => {
                 alt="WayPay на Macbook Pro" 
               />
             </ImageContainer>
-
             <TextContainer>
               <Title>Удобное хранение и управление договорами</Title>
               
@@ -160,6 +220,7 @@ const Hero: React.FC = () => {
                 Переходите на цифровой формат работы уже сегодня!
               </Description>
             </TextContainer>
+        
           </HeroContent>
       </HeroContainer>
   );

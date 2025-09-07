@@ -15,8 +15,9 @@ const HeaderContainer = styled.header`
   height: 50px;
 
   @media (max-width: 768px) {
-    padding: 16px 20px;
-    background-color: transparent; /* Прозрачный фон на мобильных */
+    height: 0px;
+    padding: 0 20px;
+    background-color: transparent;
   }
 `;
 
@@ -27,7 +28,7 @@ const LogoContainer = styled.div`
   border-radius: 10px;
   align-items: center;
   gap: 12px;
-  margin-left: 120px; /* Отступ слева для логотипа */
+  margin-left: 120px;
   
   @media (max-width: 1024px) {
     margin-left: 60px;
@@ -120,6 +121,10 @@ const ApplyButton = styled(Button)`
   }  
 `;
 
+const PhoneButton = styled(Button)`
+  margin-top: 55px;
+`;
+
 const PhoneIcon = () => (
   <svg width="24" height="24" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M8.01414 16.8835C11.077 22.9029 16.0116 27.8162 22.031 30.9003L26.7103 26.221C27.2846 25.6467 28.1354 25.4552 28.8799 25.7105C31.2621 26.4975 33.8357 26.9229 36.4732 26.9229C37.643 26.9229 38.6002 27.88 38.6002 29.0498V36.473C38.6002 37.6429 37.643 38.6 36.4732 38.6C16.5008 38.6 0.314453 22.4137 0.314453 2.44127C0.314453 1.27143 1.2716 0.314285 2.44144 0.314285H9.88588C11.0557 0.314285 12.0129 1.27143 12.0129 2.44127C12.0129 5.1 12.4383 7.65238 13.2252 10.0346C13.4592 10.779 13.2891 11.6086 12.6935 12.2041L8.01414 16.8835Z" fill="url(#paint0_linear_79_235)"/>
@@ -202,9 +207,9 @@ const Header: React.FC<HeaderProps> = ({
         
         <ButtonsContainer>
           {isMobile ? (
-            <Button onClick={onPhoneClick || handleOpenModal}>
+            <PhoneButton onClick={onPhoneClick || handleOpenModal}>
               <PhoneIcon />
-            </Button>
+            </PhoneButton>
           ) : (
             <ApplyButton onClick={handleOpenModal}>
               Оставить заявку

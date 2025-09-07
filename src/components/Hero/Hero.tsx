@@ -1,126 +1,166 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import GradientButton from '../ui/buttons/GradientButton';
-import RequestModal from '../ui/Request';
-import Layout from '../ui/Layout';
-
-const getDaysUntilNewYear = (): number => {
-  const now = new Date();
-  const targetDate = new Date(2026, 0, 1);
-  const timeDiff = targetDate.getTime() - now.getTime();
-  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  return daysDiff > 0 ? daysDiff : 0;
-};
 
 const HeroContainer = styled.section`
-  padding: 40px 0;
-  text-align: center;
+  padding: 10px 0 30px 0;
   background: #2CA5AD;
-
+  position: relative;
+  overflow: hidden;
+  
   @media (max-width: 768px) {
+    padding: 40px 0;
+  }
+`;
+
+const HeroContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ImageContainer = styled.div`
+  flex: 0 0 60%;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 1;
+  
+  @media (max-width: 1024px) {
+    flex: 0 0 55%;
+  }
+  
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+`;
+
+const MacbookImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  
+  @media (max-width: 768px) {
+    max-width: 80%;
+  }
+`;
+
+const TextContainer = styled.div`
+  flex: 0 0 50%;
+  position: relative;
+  z-index: 2;
+  margin-left: -7%;
+  margin-top: -10%;
+  
+  @media (max-width: 1024px) {
+    flex: 0 0 45%;
+    margin-left: -8%;
+  }
+  
+  @media (max-width: 768px) {
+    flex: 0 0 auto;
+    margin-left: 0;
+    width: 100%;
     padding: 0 20px;
+    text-align: center;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 64px;
+  font-weight: 500;
   color: white;
+  text-align: left;
   margin-bottom: 30px;
+  line-height: 1.2;
+  
+  @media (max-width: 1440px) {
+    font-size: 54px;
+  }
+  
+  @media (max-width: 1200px) {
+    font-size: 44px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 38px;
+  }
+  
+  @media (max-width: 900px) {
+    font-size: 32px;
+  }
   
   @media (max-width: 768px) {
     font-size: 2rem;
-    text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
   }
-`;
-
-const ContentContainer = styled.div`
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   
-  @media (max-width: 768px) {
-    padding: 25px 15px;
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
   }
 `;
 
 const Description = styled.p`
-  color: rgba(80, 85, 92, 1);
-  font-size: 30px;
+  color: white;
+  text-align: left;
+  font-size: 32px;
   line-height: 1.6;
-  margin: 0;
+  margin-bottom: 30px;
+  
+  @media (max-width: 1440px) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: 1200px) {
+    font-size: 24px;
+  }
+  
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 900px) {
+    font-size: 18px;
+  }
   
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    text-align: center;
   }
-`;
-
-const PromotionText = styled.div`
-  margin: 40px;
-  color: rgba(0, 125, 136, 1);
-  font-size: 2rem;
-  
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const DaysHighlight = styled.span`
-  font-weight: 700;
 `;
 
 const Hero: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const daysLeft = getDaysUntilNewYear();
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleSubmitForm = (data: { fullName: string; email: string; phone: string }) => {
-    console.log('Данные формы из героя:', data);
-  };
-
   return (
-    <>
       <HeroContainer>
-        <Layout backgroundColor='#2CA5AD'>
-          
+          <HeroContent>
+            <ImageContainer>
+              <MacbookImage 
+                src="/macbook-pro.png" 
+                alt="WayPay на Macbook Pro" 
+              />
+            </ImageContainer>
 
-          <Title>Удобное храние и управление договорами</Title>
-          
-          <ContentContainer>
-            <Description>
-              WayPay - современное решение для автоматизации учёта рассрочек, 
-              клиентов и финансов вашего бизнеса. Переходите на цифровой формат 
-              работы уже сегодня!
-            </Description>
-            
-            <PromotionText>
-              Осталось <DaysHighlight>{daysLeft} дней</DaysHighlight> до конца акции
-            </PromotionText>
-            
-            <GradientButton onClick={handleOpenModal}>
-              Узнать больше
-            </GradientButton>
-          </ContentContainer>
-        </Layout>
+            <TextContainer>
+              <Title>Удобное хранение и управление договорами</Title>
+              
+              <Description>
+                Современное решение для автоматизации учёта<br />
+                рассрочек, клиентов и финансов вашего бизнеса.<br />
+                <br />
+                Переходите на цифровой формат работы уже сегодня!
+              </Description>
+            </TextContainer>
+          </HeroContent>
       </HeroContainer>
-
-      <RequestModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSubmit={handleSubmitForm}
-        title="Узнать больше о WayPay"
-      />
-    </>
   );
 };
 

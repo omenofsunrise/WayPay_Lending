@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 const StyledDiv = styled.div<Omit<LayoutProps, 'children' | 'className'>>`
-  padding: ${({ padding = '0 200px' }) => padding};
+  padding: ${({ padding = '80px 200px' }) => padding};
   margin: ${({ margin = '0' }) => margin};
   background-color: ${({ backgroundColor = '#f5f5f5' }) => backgroundColor};
   border-radius: ${({ borderRadius = '8px' }) => borderRadius};

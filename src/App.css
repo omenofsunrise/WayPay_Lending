@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Manrope';
+  src: url('./fonts/Manrope/Manrope.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   font-size: 16px;
 }
@@ -13,6 +21,7 @@ html {
   padding: 0;
   text-align: center;
   max-width: 100vw;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .app-container {
@@ -23,7 +32,6 @@ html {
 .main-content {
   margin: auto;
   text-align: center;
-  font-family: 'Manrope', sans-serif;
   width: 100%;
   flex: 1;
 }

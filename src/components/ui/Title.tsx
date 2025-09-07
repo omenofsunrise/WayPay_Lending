@@ -8,7 +8,6 @@ interface TitleProps {
 const StyledTitle = styled.h1`
   font-size: 2.7rem;
   color: black;
-  text-align: left;
   font-weight: 700;
   font-style: bold;
   margin: 0;

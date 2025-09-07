@@ -21,7 +21,6 @@ function App() {
               <div className="main-content">
                 <Hero />
                 <Advantages />
-                <PromoBlock />
                 <Security />
                 <RequestForm />
               </div>

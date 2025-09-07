@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
 import RequestModal from '../ui/Request';
+import Layout from '../ui/Layout';
 
 const getDaysUntilNewYear = (): number => {
   const now = new Date();
@@ -86,7 +87,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <>
+    <Layout>
       <HeroContainer>
         <Title>Удобное хранение договоров</Title>
         
@@ -113,7 +114,7 @@ const Hero: React.FC = () => {
         onSubmit={handleSubmitForm}
         title="Узнать больше о WayPay"
       />
-    </>
+    </Layout>
   );
 };
 

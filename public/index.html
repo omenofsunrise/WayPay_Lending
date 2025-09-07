@@ -1,42 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/Logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Viewport для адаптивности -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    
+    <!-- Цвет темы браузера -->
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    
+    <!-- Основное SEO -->
+    <title>WayPay - автоматизация учёта рассрочек, клиентов и финансов для бизнеса</title>
+    <meta name="description" content="WayPay - современная платформа для автоматизации учета рассрочек, управления клиентами и финансовой аналитики. Увеличьте эффективность вашего бизнеса." />
+    <meta name="keywords" content="WayPay, автоматизация учета, рассрочки, управление клиентами, финансы бизнеса, учет платежей, CRM, финансовые решения, халяль, исламские рассрочки" />
+    
+    <!-- Каноническая ссылка -->
+    <link rel="canonical" href="https://waypay.one/" />
+    
+    <!-- Open Graph / Социальные сети -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://waypay.one/" />
+    <meta property="og:title" content="WayPay - автоматизация учёта рассрочек для бизнеса" />
+    <meta property="og:description" content="Современное решение для автоматизации учёта рассрочек, клиентов и финансов вашего бизнеса." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ru_RU" />
+    
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Schema.org разметка -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "WayPay",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "description": "Современное решение для автоматизации учёта рассрочек, клиентов и финансов вашего бизнеса.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "WayPay"
+      }
+    }
+    </script>
+    
+    <!-- Яблочные мета-теги -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>WayPay</title>
+    <meta name="apple-mobile-web-app-title" content="WayPay" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Microsoft-теги -->
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-TileImage" content="%PUBLIC_URL%/mstile-144x144.png" />
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
+    
+    <!-- Предзагрузка шрифтов и стилей -->
+    <link rel="preload" as="font" type="font/woff2" href="%PUBLIC_URL%/fonts/inter-regular.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="%PUBLIC_URL%/fonts/inter-bold.woff2" crossorigin>
+    
+    <!-- CSS для критического контента -->
+    <style>
+      /* Критический CSS для ускорения первоначальной отрисовки */
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Стили для noscript контента */
+      .noscript-message {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        text-align: center;
+        z-index: 9999;
+        font-weight: 500;
+      }
+      
+      /* Анимация загрузки приложения */
+      #root {
+        min-height: 100vh;
+      }
+      
+      .app-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      
+      .app-loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    <!-- End Google Tag Manager -->
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <noscript>
+      <div class="noscript-message">
+        Для работы с WayPay необходимо включить JavaScript в настройках вашего браузера.
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <!-- Контент для первоначального отображения до загрузки React -->
+      <div class="app-loading">
+        <div class="app-loading-spinner"></div>
+        <p style="margin-top: 20px;">Загрузка WayPay...</p>
+      </div>
+    </div>
+    
+    <!-- Preload скриптов -->
+    <link rel="preload" as="script" href="%PUBLIC_URL%/static/js/bundle.js" />
+    <link rel="preload" as="script" href="%PUBLIC_URL%/static/js/0.chunk.js" />
+    <link rel="preload" as="script" href="%PUBLIC_URL%/static/js/main.chunk.js" />
+    
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
+      Этот HTML-файл является шаблоном.
+      Если вы откроете его непосредственно в браузере, вы увидите пустую страницу.
+      
+      Вы можете добавить веб-шрифты, мета-теги или аналитику в этот файл.
+      Шаг сборки поместит связанные скрипты в тег <body>.
+      
+      Чтобы начать разработку, запустите `npm start` или `yarn start`.
+      Чтобы создать production сборку, используйте `npm run build` или `yarn build`.
     -->
   </body>
 </html>

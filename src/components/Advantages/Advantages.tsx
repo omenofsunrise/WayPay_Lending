@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import InfoCard from './InfoCard';
 import Title from '../ui/Title';
+import Layout from '../ui/Layout';
 
 const SectionContainer = styled.section`
   margin: 30px 0;
@@ -96,21 +97,23 @@ const advantagesData = [
 
 const Advantages: React.FC = () => {
   return (
-    <SectionContainer>
-      <Title>
-        Корпоративная CRM система для учёта рассрочек, клиентов и финансов
-      </Title>
-      <AdvantagesGrid>
-        {advantagesData.map((advantage, index) => (
-          <InfoCard
-            key={index}
-            icon={advantage.icon}
-            title={advantage.title}
-            description={advantage.description}
-          />
-        ))}
-      </AdvantagesGrid>
-    </SectionContainer>
+    <Layout>
+      <SectionContainer>
+        <Title>
+          Почему стоит выбрать Way Pay?
+        </Title>
+        <AdvantagesGrid>
+          {advantagesData.map((advantage, index) => (
+            <InfoCard
+              key={index}
+              icon={advantage.icon}
+              title={advantage.title}
+              description={advantage.description}
+            />
+          ))}
+        </AdvantagesGrid>
+      </SectionContainer>
+    </Layout>
   );
 };
 

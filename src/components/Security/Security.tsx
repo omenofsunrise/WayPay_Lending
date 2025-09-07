@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SecurityItem, { SecurityItemProps } from './SecurityItem';
 import Title from '../ui/Title';
+import Layout from '../ui/Layout';
 
 const Security: React.FC = () => {
   const securityItems: SecurityItemProps[] = [
@@ -23,19 +24,21 @@ const Security: React.FC = () => {
   ];
 
   return (
-    <SecurityContainer>
-        <Title>Современные стандарты технологий и безопасности</Title>
-        <SecurityWrapper>
-            {securityItems.map((item, index) => (
-                <SecurityItem
-                    key={index}
-                    icon={item.icon}
-                    title={item.title}
-                    description={item.description}
-                />
-            ))}
-        </SecurityWrapper>
-    </SecurityContainer>
+    <Layout>
+      <SecurityContainer>
+          <Title>Современные стандарты технологий и безопасности</Title>
+          <SecurityWrapper>
+              {securityItems.map((item, index) => (
+                  <SecurityItem
+                      key={index}
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.description}
+                  />
+              ))}
+          </SecurityWrapper>
+      </SecurityContainer>
+    </Layout>
   );
 };
 

@@ -4,16 +4,16 @@ import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
 
 const HeaderContainer = styled.header`
+  padding: 20px 0;
   display: flex;
-  margin: 0;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
-  background-color: none;
+  background-color: #2CA5AD;
   position: sticky;
   top: 0;
   z-index: 100;
-  
+  height: 50px;
+
   @media (max-width: 768px) {
     padding: 16px 20px;
   }
@@ -21,12 +21,20 @@ const HeaderContainer = styled.header`
 
 const LogoContainer = styled.div`
   display: flex;
-  box-shadow: 0 5px 8px 0 rgba(80, 85, 92, 0.25);
-  background: white;
+  background: none;
   padding: 15px;
   border-radius: 10px;
   align-items: center;
   gap: 12px;
+  margin-left: 120px; /* Отступ слева для логотипа */
+  
+  @media (max-width: 1024px) {
+    margin-left: 60px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const Logo = styled.img`
@@ -47,11 +55,67 @@ const LogoText = styled.img`
   }
 `;
 
+const NavContainer = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  @media (max-width: 1024px) {
+    gap: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const NavButton = styled.button`
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(45, 52, 54, 0.05);
+  }
+  
+  &:active {
+    background-color: rgba(45, 52, 54, 0.1);
+  }
+`;
+
 const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-left: auto;
+  margin-right: 120px; /* Отступ справа для кнопки */
+  
+  @media (max-width: 1024px) {
+    margin-right: 60px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
+`;
+
+const ApplyButton = styled(Button)`
+  background: none;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  box-shadow: none;
+  font-size: 20px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }  
 `;
 
 const PhoneIcon = () => (
@@ -66,6 +130,61 @@ const PhoneIcon = () => (
   </svg>
 );
 
+const MenuIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 12H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3 6H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3 18H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+interface MobileMenuProps {
+  $isOpen: boolean;
+}
+
+const MobileMenu = styled.div<MobileMenuProps>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  padding: 80px 24px 24px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(${props => props.$isOpen ? '0' : '100%'});
+  transition: transform 0.3s ease;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+interface OverlayProps {
+  $isOpen: boolean;
+}
+
+const Overlay = styled.div<OverlayProps>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: ${props => props.$isOpen ? 'block' : 'none'};
+`;
+
 interface HeaderProps {
   onApplicationClick?: () => void;
   onPhoneClick?: () => void;
@@ -78,7 +197,8 @@ const Header: React.FC<HeaderProps> = ({
   className
 }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   React.useEffect(() => {
     const checkIsMobile = () => {
@@ -107,20 +227,41 @@ const Header: React.FC<HeaderProps> = ({
     console.log('Данные формы:', data);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavClick = (section: string) => {
+    console.log(`Переход к разделу: ${section}`);
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <HeaderContainer className={className}>        
+        <LogoContainer>
+          <Logo src="/Vector1.svg" alt="Logo" />
+          <LogoText src="/Vector2.svg" alt="Company Name" />
+        </LogoContainer>
+        
+        <NavContainer>
+          <NavButton onClick={() => handleNavClick('home')}>Главная</NavButton>
+          <NavButton onClick={() => handleNavClick('features')}>Возможности</NavButton>
+          <NavButton onClick={() => handleNavClick('application')}>Приложение</NavButton>
+          <NavButton onClick={() => handleNavClick('tarif')}>Тарифы</NavButton>
+        </NavContainer>
+        
         <ButtonsContainer>
           {isMobile ? (
-            <Button onClick={onPhoneClick || handleOpenModal}>
-              <PhoneIcon />
-            </Button>
-          ) : (
             <>
-              <Button onClick={handleOpenModal}>
-                Оставить заявку
+              <Button onClick={onPhoneClick || handleOpenModal}>
+                <PhoneIcon />
               </Button>
             </>
+          ) : (
+            <ApplyButton onClick={handleOpenModal}>
+              Оставить заявку
+            </ApplyButton>
           )}
         </ButtonsContainer>
       </HeaderContainer>

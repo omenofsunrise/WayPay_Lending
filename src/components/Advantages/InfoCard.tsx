@@ -10,6 +10,8 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 `;
 
 const Header = styled.div`
@@ -49,7 +51,8 @@ const Title = styled.h3`
   line-height: 1.3;
   margin: 0;
   word-wrap: break-word;
-  hyphens: auto;
+  overflow-wrap: break-word;
+  hyphens: manual; /* Изменено с auto на manual */
   
   @media (max-width: 480px) {
     margin-left: 0;
@@ -65,7 +68,8 @@ const Description = styled.p`
   line-height: 1.5;
   text-align: left;
   word-wrap: break-word;
-  hyphens: auto;
+  overflow-wrap: break-word;
+  hyphens: manual; /* Изменено с auto на manual */
   
   @media (max-width: 768px) {
     text-align: justify;

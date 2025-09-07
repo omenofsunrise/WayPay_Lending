@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
+import Layout from '../ui/Layout';
 
 const PromoContainer = styled.div`
   background: linear-gradient(160deg, rgba(0, 125, 136, 1), rgba(37, 203, 161, 1));
@@ -106,7 +107,7 @@ const PromoBlock: React.FC<PromoBlockProps> = ({
   };
 
   return (
-    <>
+    <Layout>
       <PromoContainer>
         <Title>Специальное предложение!</Title>
         <Description>
@@ -128,7 +129,7 @@ const PromoBlock: React.FC<PromoBlockProps> = ({
         onSubmit={handleSubmitForm}
         title="Получить специальное предложение"
       />
-    </>
+    </Layout>
   );
 };
 

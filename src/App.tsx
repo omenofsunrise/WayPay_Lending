@@ -15,15 +15,13 @@ function App() {
     <Router>
       <div className="app-container">
         <Routes>
-          {/* Главная страница */}
           <Route path="/" element={
             <>
+              <Header />
               <div className="main-content">
-                <Header />
                 <Hero />
                 <Advantages />
                 <PromoBlock />
-                <InterfaceForm />
                 <Security />
                 <RequestForm />
               </div>
@@ -31,7 +29,6 @@ function App() {
             </>
           } />
           
-          {/* Страница политики конфиденциальности */}
           <Route path="/privacy" element={
             <>
               <Header />

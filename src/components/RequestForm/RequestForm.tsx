@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import Title from '../ui/Title';
 import Descript from '../ui/Descript';
 import RequestContainer from './RequestContainer';
+import Layout from '../ui/Layout';
 
 const RequestForm: React.FC = () => {
 
   return (
-    <SecurityContainer>
-        <Title>Готовы оптимизировать свой бизнес?</Title>
-        <Descript>Оставьте заявку и мы свяжемся с вами</Descript>
-        <RequestContainer />
-    </SecurityContainer>
+    <Layout>
+      <SecurityContainer>
+          <Title>Готовы оптимизировать свой бизнес?</Title>
+          <Descript>Оставьте заявку и мы свяжемся с вами</Descript>
+          <RequestContainer />
+      </SecurityContainer>
+    </Layout>
   );
 };
 

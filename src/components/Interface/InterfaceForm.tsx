@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Title from '../ui/Title';
 import Descript from '../ui/Descript';
+import Layout from '../ui/Layout';
 
 interface VideoItem {
   src: string;
@@ -72,34 +73,36 @@ const InterfaceForm: React.FC = () => {
   const currentVideos = isMobile ? mobileVideos : desktopVideos;
 
   return (
-    <SecurityContainer>
-      <Title>Интерфейс WayPay</Title>
-      <Descript>Простота и удобство - ключевые принципы нашей системы</Descript>
-      
-      <VideosContainer>
-        {currentVideos.map((video, index) => (
-          <VideoCard key={index}>
-            <VideoTitle>{video.title}</VideoTitle>
-            <VideoWrapper $isMobile={isMobile}>
-              <OptimizedVideo
-                ref={addVideoRef(index)}
-                src={video.src}
-                poster={video.poster}
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                $isMobile={isMobile}
-              />
-            </VideoWrapper>
-          </VideoCard>
-        ))}
-      </VideosContainer>
-      
-      <Disclaimer>
-        *Обращаем ваше внимание, что все данные, представленные на скриншотах и видео, являются демонстрационными и не содержат реальной информации о клиентах.
-      </Disclaimer>
-    </SecurityContainer>
+    <Layout>
+      <SecurityContainer>
+        <Title>Интерфейс WayPay</Title>
+        <Descript>Простота и удобство - ключевые принципы нашей системы</Descript>
+        
+        <VideosContainer>
+          {currentVideos.map((video, index) => (
+            <VideoCard key={index}>
+              <VideoTitle>{video.title}</VideoTitle>
+              <VideoWrapper $isMobile={isMobile}>
+                <OptimizedVideo
+                  ref={addVideoRef(index)}
+                  src={video.src}
+                  poster={video.poster}
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  $isMobile={isMobile}
+                />
+              </VideoWrapper>
+            </VideoCard>
+          ))}
+        </VideosContainer>
+        
+        <Disclaimer>
+          *Обращаем ваше внимание, что все данные, представленные на скриншотах и видео, являются демонстрационными и не содержат реальной информации о клиентах.
+        </Disclaimer>
+      </SecurityContainer>
+    </Layout>
   );
 };
 

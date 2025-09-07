@@ -204,14 +204,14 @@ const Footer: React.FC = () => {
         <MainContent>
           <LogoSection>
             <Logo 
-              src="/BlackLogo.svg" 
+              src="/Logos/BlackLogo.svg" 
               alt="Логотип" 
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
               }}
             />
             <LogoText 
-              src="/BlackLogoText.svg" 
+              src="/Logos/BlackLogoText.svg" 
               alt="Текст логотипа" 
               onError={(e) => {
                 e.currentTarget.style.display = 'none';

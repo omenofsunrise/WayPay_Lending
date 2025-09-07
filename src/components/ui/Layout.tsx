@@ -8,6 +8,11 @@ interface LayoutProps {
   margin?: string;
   backgroundColor?: string;
   borderRadius?: string;
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  display?: 'flex' | 'block' | 'inline' | 'inline-block' | 'grid';
+  alignItems?: string;
+  justifyContent?: string;
+  gap?: string;
 }
 
 const StyledDiv = styled.div<Omit<LayoutProps, 'children' | 'className'>>`
@@ -15,6 +20,11 @@ const StyledDiv = styled.div<Omit<LayoutProps, 'children' | 'className'>>`
   margin: ${({ margin = '0' }) => margin};
   background-color: ${({ backgroundColor = '#f5f5f5' }) => backgroundColor};
   border-radius: ${({ borderRadius = '8px' }) => borderRadius};
+  display: ${({ display = 'block' }) => display};
+  flex-direction: ${({ flexDirection = 'row' }) => flexDirection};
+  align-items: ${({ alignItems = 'stretch' }) => alignItems};
+  justify-content: ${({ justifyContent = 'flex-start' }) => justifyContent};
+  gap: ${({ gap = 'normal' }) => gap};
 
   @media (max-width: 768px) {
     padding: 0 5px;

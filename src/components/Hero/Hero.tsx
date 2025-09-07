@@ -145,7 +145,7 @@ const Hero: React.FC = () => {
           <HeroContent>
             <ImageContainer>
               <MacbookImage 
-                src="/macbook-pro.png" 
+                src="/Images/macbook-pro.png" 
                 alt="WayPay на Macbook Pro" 
               />
             </ImageContainer>

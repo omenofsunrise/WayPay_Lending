@@ -188,8 +188,8 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderContainer className={className}>        
         {!isMobile && (
           <LogoContainer>
-            <Logo src="/Logo.svg" alt="Logo" />
-            <LogoText src="/LogoText.svg" alt="WayPay" />
+            <Logo src="/Logos/Logo.svg" alt="Logo" />
+            <LogoText src="/Logos/LogoText.svg" alt="WayPay" />
           </LogoContainer>
         )}
         
@@ -197,7 +197,7 @@ const Header: React.FC<HeaderProps> = ({
           <NavButton onClick={() => handleNavClick('home')}>Главная</NavButton>
           <NavButton onClick={() => handleNavClick('features')}>Возможности</NavButton>
           <NavButton onClick={() => handleNavClick('application')}>Приложение</NavButton>
-          <NavButton onClick={() => handleNavClick('tarif')}>Тарифы</NavButton>
+          <NavButton onClick={() => handleNavClick('tarif')}>Цены</NavButton>
         </NavContainer>
         
         <ButtonsContainer>

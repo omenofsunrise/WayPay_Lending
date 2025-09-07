@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
 
 const Container = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+  width: 100%;
 `;
 
 const Form = styled.form`
@@ -21,17 +18,37 @@ const FieldGroup = styled.div`
   margin-top: 20px;
 `;
 
-const Label = styled.label<{ isFocused: boolean; hasValue: boolean }>`
+const Row = styled.div`
+  display: flex;
+  gap: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+`;
+
+const InlineFieldGroup = styled(FieldGroup)`
+  flex: 1;
+`;
+
+const Label = styled.label<{ isFocused: boolean; hasValue: boolean; isComment?: boolean }>`
   position: absolute;
   left: 16px;
-  top: ${props => (props.isFocused || props.hasValue ? '0' : '50%')};
-  transform: ${props => (props.isFocused || props.hasValue ? 'translateY(-50%)' : 'translateY(-50%)')};
-  font-size: ${props => (props.isFocused || props.hasValue ? '0.9em' : '1.5em')};
-  color: ${props => (props.isFocused ? '#007d88' : '#999')};
-  background: white;
+  top: ${props => {
+    if (props.isComment) {
+      return (props.isFocused || props.hasValue) ? '0' : '10%';
+    }
+    return (props.isFocused || props.hasValue) ? '0' : '50%';
+  }};
+  transform: ${props => (props.isFocused || props.hasValue) ? 'translateY(-50%)' : 'translateY(-50%)'};
+  font-size: ${props => (props.isFocused || props.hasValue) ? '0.9em' : '1.5em'};
+  color: ${props => (props.isFocused ? '#ffceceff' : '#999')};
   padding: 0 4px;
   transition: all 0.2s ease;
   pointer-events: none;
+  background: white;
+  z-index: 1;
 `;
 
 const Input = styled.input`
@@ -43,6 +60,26 @@ const Input = styled.input`
   color: black;
   width: 100%;
   box-sizing: border-box;
+  
+  &:focus {
+    outline: none;
+    border-color: #007d88;
+    box-shadow: 0 0 0 2px rgba(0, 125, 136, 0.1);
+  }
+`;
+
+const TextArea = styled.textarea`
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1.5em;
+  transition: border-color 0.3s ease;
+  color: black;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
   
   &:focus {
     outline: none;
@@ -87,11 +124,19 @@ const ButtonContent = styled.div`
   justify-content: center;
 `;
 
+const OptionalText = styled.span`
+  color: #999;
+  font-size: 0.8em;
+  margin-left: 4px;
+  font-weight: normal;
+`;
+
 interface RequestContainerProps {
   onSubmit?: (data: {
     fullName: string;
     email: string;
     phone: string;
+    comment?: string;
   }) => void;
   className?: string;
 }
@@ -105,7 +150,8 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phone: ''
+    phone: '',
+    comment: ''
   });
   
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -133,7 +179,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
           text: result.message || 'Заявка успешно отправлена!',
           isError: false
         });
-        setFormData({ fullName: '', email: '', phone: '' });
+        setFormData({ fullName: '', email: '', phone: '', comment: '' });
       } else {
         const errorData = await response.json().catch(() => null);
         setMessage({
@@ -150,12 +196,11 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
       setIsLoading(false);
     }
 
-    // Вызываем переданный колбэк, если он есть
     onSubmit?.(formData);
   };
 
   const handleInputChange = (field: keyof typeof formData) => (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData(prev => ({
       ...prev,
@@ -194,43 +239,65 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
           />
         </FieldGroup>
 
-        <FieldGroup>
-          <Label 
-            htmlFor="email" 
-            isFocused={focusedField === 'email'} 
-            hasValue={!!formData.email}
-          >
-            Email
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange('email')}
-            onFocus={handleFocus('email')}
-            onBlur={handleBlur}
-            required
-            disabled={isLoading}
-          />
-        </FieldGroup>
+        <Row>
+          <InlineFieldGroup>
+            <Label 
+              htmlFor="email" 
+              isFocused={focusedField === 'email'} 
+              hasValue={!!formData.email}
+            >
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange('email')}
+              onFocus={handleFocus('email')}
+              onBlur={handleBlur}
+              required
+              disabled={isLoading}
+            />
+          </InlineFieldGroup>
+
+          <InlineFieldGroup>
+            <Label 
+              htmlFor="phone" 
+              isFocused={focusedField === 'phone'} 
+              hasValue={!!formData.phone}
+            >
+              Телефон
+            </Label>
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleInputChange('phone')}
+              onFocus={handleFocus('phone')}
+              onBlur={handleBlur}
+              required
+              disabled={isLoading}
+            />
+          </InlineFieldGroup>
+        </Row>
 
         <FieldGroup>
           <Label 
-            htmlFor="phone" 
-            isFocused={focusedField === 'phone'} 
-            hasValue={!!formData.phone}
+            htmlFor="comment" 
+            isFocused={focusedField === 'comment'} 
+            hasValue={!!formData.comment}
+            isComment={true}
           >
-            Телефон
+            Комментарий <OptionalText>(необязательно)</OptionalText>
           </Label>
-          <Input
-            id="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleInputChange('phone')}
-            onFocus={handleFocus('phone')}
+          <TextArea
+            id="comment"
+            value={formData.comment}
+            onChange={handleInputChange('comment')}
+            onFocus={handleFocus('comment')}
             onBlur={handleBlur}
-            required
             disabled={isLoading}
+            rows={4}
           />
         </FieldGroup>
 

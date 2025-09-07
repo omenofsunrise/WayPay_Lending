@@ -20,7 +20,7 @@ const HeroContent = styled.div`
   position: relative;
   max-width: 1920px;
   margin: 0 auto;
-  
+  padding-top: 20px;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -30,7 +30,7 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   z-index: 1;
-  max-height: 800px;
+  max-height: 1000px;
   max-width: 500px;
 
   @media (max-width: 1024px) {
@@ -104,7 +104,7 @@ const FeaturesGrid = styled.div`
 const FeatureBox = styled.div`
   border: 1px solid #05909C;
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 20px;
   background: white;
 `;
 
@@ -147,7 +147,7 @@ const Mobile: React.FC = () => {
           <HeroContent>
             <ImageContainer>
               <MacbookImage 
-                src="/mobile.png" 
+                src="/Images/mobile.png" 
                 alt="WayPay на телефоне" 
               />
             </ImageContainer>

@@ -16,6 +16,7 @@ const HeaderContainer = styled.header`
 
   @media (max-width: 768px) {
     padding: 16px 20px;
+    background-color: transparent; /* Прозрачный фон на мобильных */
   }
 `;
 
@@ -103,6 +104,7 @@ const ButtonsContainer = styled.div`
   
   @media (max-width: 768px) {
     margin-right: 0;
+    margin-left: auto; /* Кнопка справа на мобильных */
   }
 `;
 
@@ -184,10 +186,12 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <HeaderContainer className={className}>        
-        <LogoContainer>
-          <Logo src="/Logo.svg" alt="Logo" />
-          <LogoText src="/LogoText.svg" alt="WayPay" />
-        </LogoContainer>
+        {!isMobile && (
+          <LogoContainer>
+            <Logo src="/Logo.svg" alt="Logo" />
+            <LogoText src="/LogoText.svg" alt="WayPay" />
+          </LogoContainer>
+        )}
         
         <NavContainer>
           <NavButton onClick={() => handleNavClick('home')}>Главная</NavButton>
@@ -198,11 +202,9 @@ const Header: React.FC<HeaderProps> = ({
         
         <ButtonsContainer>
           {isMobile ? (
-            <>
-              <Button onClick={onPhoneClick || handleOpenModal}>
-                <PhoneIcon />
-              </Button>
-            </>
+            <Button onClick={onPhoneClick || handleOpenModal}>
+              <PhoneIcon />
+            </Button>
           ) : (
             <ApplyButton onClick={handleOpenModal}>
               Оставить заявку

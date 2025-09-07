@@ -19,7 +19,7 @@ const RequestForm: React.FC = () => {
 };
 
 const SecurityContainer = styled.section`
-  padding: 80px 0;
+  padding: 0 0 80px;
 
   @media (max-width: 768px) {
     white-space: normal;

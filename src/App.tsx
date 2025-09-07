@@ -4,11 +4,10 @@ import Advantages from './components/Advantages/Advantages';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
-import InterfaceForm from './components/Interface/InterfaceForm';
-import PromoBlock from './components/PromoBlock/PromoBlock';
 import RequestForm from './components/RequestForm/RequestForm';
 import Security from './components/Security/Security';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
+import Mobile from './components/Mobile/Mobile';
 
 function App() {
   return (
@@ -22,6 +21,7 @@ function App() {
                 <Hero />
                 <Advantages />
                 <Security />
+                <Mobile />
                 <RequestForm />
               </div>
               <Footer />

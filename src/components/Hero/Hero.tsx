@@ -76,7 +76,8 @@ const TextContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 64px;
-  font-weight: 500;
+  font-weight: 900;
+  font-style: bold;
   color: white;
   text-align: left;
   margin-bottom: 30px;

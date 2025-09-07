@@ -9,52 +9,56 @@ import Security from './components/Security/Security';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import Mobile from './components/Mobile/Mobile';
 import Prices from './components/Prices/Prices';
+import { ScrollProvider, useScroll } from './contexts/ScrollContext';
+
+const MainPage: React.FC = () => {
+  const { sections } = useScroll();
+
+  return (
+    <>
+      <Header />
+      <div className="main-content">
+        <div ref={sections.home}>
+          <Hero />
+        </div>
+        <div ref={sections.features}>
+          <Advantages />
+        </div>
+        <div ref={sections.tarif}>
+          <Prices />
+        </div>
+        <Security />
+        <div ref={sections.application}>
+          <Mobile />
+        </div>
+        <RequestForm />
+      </div>
+      <Footer />
+    </>
+  );
+};
 
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Header />
-              <div className="main-content">
-                <Hero />
-                <Advantages />
-                <Prices />
-                <Security />
-                <Mobile />
-                <RequestForm />
-              </div>
-              <Footer />
-            </>
-          } />
-          
-          <Route path="*" element={
-            <>
-              <Header />
-              <div className="main-content">
-                <Hero />
-                <Advantages />
-                <Prices />
-                <Security />
-                <Mobile />
-                <RequestForm />
-              </div>
-              <Footer />
-            </>
-            } />
+    <ScrollProvider>
+      <Router>
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            
+            <Route path="*" element={<MainPage />} />
 
-          <Route path="/privacy" element={
-            <>
-              <Header />
-              <PrivacyPolicy />
-              <Footer />
-            </>
-          } />
-        </Routes>
-      </div>
-    </Router>
+            <Route path="/privacy" element={
+              <>
+                <Header />
+                <PrivacyPolicy />
+                <Footer />
+              </>
+            } />
+          </Routes>
+        </div>
+      </Router>
+    </ScrollProvider>
   );
 }
 

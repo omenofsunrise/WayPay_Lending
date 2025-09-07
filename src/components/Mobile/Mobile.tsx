@@ -10,7 +10,7 @@ const HeroContainer = styled.section`
   overflow: hidden;
   
   @media (max-width: 768px) {
-    padding: 0 0 40px;
+    padding: 20px 0 40px;
   }
 `;
 

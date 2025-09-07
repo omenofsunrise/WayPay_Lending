@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
+import { useScroll } from '../../contexts/ScrollContext';
 
 const HeaderContainer = styled.header`
   padding: 20px 0;
@@ -159,7 +160,8 @@ const Header: React.FC<HeaderProps> = ({
   const [isMobile, setIsMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { scrollToSection } = useScroll();
+  
   React.useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -192,7 +194,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleNavClick = (section: string) => {
-    console.log(`Переход к разделу: ${section}`);
+    scrollToSection(section);
     setIsMenuOpen(false);
   };
 
@@ -209,8 +211,8 @@ const Header: React.FC<HeaderProps> = ({
         <NavContainer>
           <NavButton onClick={() => handleNavClick('home')}>Главная</NavButton>
           <NavButton onClick={() => handleNavClick('features')}>Возможности</NavButton>
-          <NavButton onClick={() => handleNavClick('application')}>Приложение</NavButton>
           <NavButton onClick={() => handleNavClick('tarif')}>Цены</NavButton>
+          <NavButton onClick={() => handleNavClick('application')}>Приложение</NavButton>
         </NavContainer>
         
         <ButtonsContainer>

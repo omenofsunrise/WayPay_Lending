@@ -9,7 +9,7 @@ const PricingContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 40px 0;
+  margin: 40px 0 0;
   flex-wrap: wrap;
 
   @media (max-width: 768px) {
@@ -36,7 +36,7 @@ const PricingBox = styled.div<{ $isPromo?: boolean }>`
     width: 100%;
     max-width: 320px;
     transform: none;
-    margin-bottom: ${props => props.$isPromo ? '0' : '20px'};
+    margin-bottom: 0;
   }
 `;
 
@@ -102,11 +102,10 @@ const ApplyButton = styled(Button)`
 const Prices: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Calculate days left until January 1st of next year
   const calculateDaysLeft = () => {
     const today = new Date();
     const nextYear = today.getFullYear() + 1;
-    const targetDate = new Date(nextYear, 0, 1); // January 1st of next year
+    const targetDate = new Date(nextYear, 0, 1);
     const timeDiff = targetDate.getTime() - today.getTime();
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
   };
@@ -126,8 +125,6 @@ const Prices: React.FC = () => {
     email: string;
     phone: string;
   }) => {
-    // Данные уже отправляются через модальное окно, но здесь вы можете
-    // выполнить дополнительные действия после отправки
     console.log('Данные формы:', data);
   };
 

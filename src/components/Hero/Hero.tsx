@@ -91,6 +91,7 @@ const Title = styled.h1`
   font-size: 40px;
   font-weight: 900;
   font-style: bold;
+  padding-right: 200px;
   color: white;
   text-align: left;
   margin-bottom: 30px;
@@ -102,6 +103,7 @@ const Title = styled.h1`
   
   @media (max-width: 1200px) {
     font-size: 30px;
+    padding-right: 90px;
   }
   
   @media (max-width: 1024px) {
@@ -152,6 +154,10 @@ const Description = styled.p`
   line-height: 1.6;
   margin-bottom: 30px;
   
+  @media (max-width: 1440px) {
+    font-size: 28px;
+  }
+    
   @media (max-width: 1440px) {
     font-size: 28px;
   }

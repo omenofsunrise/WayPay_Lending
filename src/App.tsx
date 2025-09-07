@@ -8,6 +8,7 @@ import RequestForm from './components/RequestForm/RequestForm';
 import Security from './components/Security/Security';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import Mobile from './components/Mobile/Mobile';
+import Prices from './components/Prices/Prices';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <div className="main-content">
                 <Hero />
                 <Advantages />
+                <Prices />
                 <Security />
                 <Mobile />
                 <RequestForm />
@@ -34,6 +36,7 @@ function App() {
               <div className="main-content">
                 <Hero />
                 <Advantages />
+                <Prices />
                 <Security />
                 <Mobile />
                 <RequestForm />

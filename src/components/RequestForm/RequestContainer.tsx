@@ -42,7 +42,7 @@ const Label = styled.label<{ isFocused: boolean; hasValue: boolean; isComment?: 
   left: 16px;
   top: ${props => {
     if (props.isComment) {
-      return (props.isFocused || props.hasValue) ? '0' : '10%';
+      return (props.isFocused || props.hasValue) ? '0' : '17%';
     }
     return (props.isFocused || props.hasValue) ? '0' : '50%';
   }};

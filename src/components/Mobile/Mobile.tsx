@@ -44,6 +44,7 @@ const ImageContainer = styled.div`
   z-index: 1;
   max-height: 1000px;
   max-width: 500px;
+  margin-bottom: auto;
 
   @media (max-width: 1024px) {
     flex: 0 0 55%;
@@ -98,6 +99,7 @@ const MainText = styled.h2`
   @media (max-width: 768px) {
     font-size: 28px;
     margin-bottom: 30px;
+    padding: 0 10px;
   }
 `;
 
@@ -130,7 +132,7 @@ const FeatureBox = styled.div`
 `;
 
 const FeatureTitle = styled.h3`
-  font-size: 36px;
+  font-size: clamp(1.875rem, 1.25rem + 1.0417vw, 2rem);
   font-weight: 600;
   text-align: center;
   color: black;
@@ -165,7 +167,6 @@ const Mobile: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   if (isMobile) {
-    // Рендеринг для мобильных устройств
     return (
       <HeroContainer>
         <Title>Мобильный CRM для вашей эффективности</Title>

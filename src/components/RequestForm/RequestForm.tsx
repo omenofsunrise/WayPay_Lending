@@ -8,7 +8,7 @@ const RequestForm: React.FC = () => {
   return (
     <SecurityContainer>
       <Title color='white'>Готовы оптимизировать свой бизнес?</Title>
-      <Layout backgroundColor='#2BA5AD' flexDirection='row' padding='0 380px'>
+      <CustomLayout backgroundColor='#2BA5AD' flexDirection='row' padding='0 380px'>
         <ContentWrapper>
           <LeftSection>
             <ImageContainer>
@@ -23,10 +23,21 @@ const RequestForm: React.FC = () => {
             <RequestContainer />
           </RightSection>
         </ContentWrapper>
-      </Layout>
+      </CustomLayout>
     </SecurityContainer>
   );
 };
+
+const CustomLayout = styled(Layout)`
+  background-color: #2BA5AD;
+  flex-direction: row;
+  padding: 0 380px;
+  
+  @media (max-width: 1920px) { padding: 40px 300px; }
+    @media (max-width: 1440px) { padding: 35px 200px; }
+    @media (max-width: 1024px) { padding: 30px 100px; }
+    @media (max-width: 768px) { padding: 10px; }
+`;
 
 const ContentWrapper = styled.div`
   display: flex;

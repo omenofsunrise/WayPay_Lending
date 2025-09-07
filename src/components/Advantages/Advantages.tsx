@@ -99,7 +99,7 @@ const Advantages: React.FC = () => {
     <Layout>
       <SectionContainer>
         <Title>
-          Почему стоит выбрать Way Pay?
+          Почему стоит выбрать WayPay?
         </Title>
         <AdvantagesGrid>
           {advantagesData.map((advantage, index) => (

@@ -79,7 +79,7 @@ const SecurityWrapper = styled.div`
   align-items: stretch;
   gap: 40px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1380px) {
     flex-direction: column;
     gap: 30px;
   }

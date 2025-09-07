@@ -63,13 +63,13 @@ const Title = styled.h3`
 
 const Description = styled.p`
   margin: 0;
-  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-size: clamp(1rem, 3vw, 1.5rem);
   color: #666;
   line-height: 1.5;
   text-align: left;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: manual; /* Изменено с auto на manual */
+  hyphens: manual;
   
   @media (max-width: 768px) {
     text-align: justify;

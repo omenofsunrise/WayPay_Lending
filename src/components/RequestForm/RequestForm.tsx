@@ -8,7 +8,7 @@ const RequestForm: React.FC = () => {
   return (
     <SecurityContainer>
       <Title color='white'>Готовы оптимизировать свой бизнес?</Title>
-      <Layout backgroundColor='#2BA5AD' flexDirection='row' padding='0 200px'>
+      <Layout backgroundColor='#2BA5AD' flexDirection='row' padding='0 380px'>
         <ContentWrapper>
           <LeftSection>
             <ImageContainer>

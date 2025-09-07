@@ -92,6 +92,14 @@ const NavButton = styled.button`
   &:active {
     background-color: rgba(45, 52, 54, 0.1);
   }
+
+  @media (max-width: 1350px) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 1250px) {
+    display: none;
+  }
 `;
 
 const ButtonsContainer = styled.div`

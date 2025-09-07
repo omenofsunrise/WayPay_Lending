@@ -4,13 +4,24 @@ import Title from '../ui/Title';
 import { useMediaQuery } from 'react-responsive';
 
 const HeroContainer = styled.section`
-  padding: 50px 200px 50px 0;
+  padding: 0 380px 50px 0;
   background: white;
   position: relative;
   overflow: hidden;
   
   @media (max-width: 768px) {
-    padding: 40px 0;
+    padding: 0 0 40px;
+  }
+`;
+
+const TitleContainer = styled.section`
+  background: white;
+  position: relative;
+  overflow: hidden;
+  padding-top: 40px;
+
+  @media (max-width: 768px) {
+    padding: 40px 0 0;
   }
 `;
 
@@ -21,7 +32,6 @@ const HeroContent = styled.div`
   position: relative;
   max-width: 1920px;
   margin: 0 auto;
-  padding-top: 20px;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -197,45 +207,48 @@ const Mobile: React.FC = () => {
     );
   }
 
-  // Рендеринг для десктопных устройств
   return (
-    <HeroContainer>
-      <Title>Мобильный CRM для вашей эффективности</Title>
-      <HeroContent>
-        <ImageContainer>
-          <MacbookImage 
-            src="/Images/mobile.png" 
-            alt="WayPay на телефоне" 
-          />
-        </ImageContainer>
+    <>
+      <TitleContainer>
+        <Title>Мобильный CRM для вашей эффективности</Title>
+      </TitleContainer>
+      <HeroContainer>
+        <HeroContent>
+          <ImageContainer>
+            <MacbookImage 
+              src="/Images/mobile.png" 
+              alt="WayPay на телефоне" 
+            />
+          </ImageContainer>
 
-        <ContentContainer>
-          <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
-          
-          <FeaturesGrid>
-            <FeatureBox>
-              <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
-              <FeatureDescription>Никакой потери данных и всегда актуальная информация под рукой, где бы вы ни были.</FeatureDescription>
-            </FeatureBox>
+          <ContentContainer>
+            <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
             
-            <FeatureBox>
-              <FeatureTitle>Мгновенные push-уведомления</FeatureTitle>
-              <FeatureDescription>Моментальные оповещения о новых лидах, смене статуса сделки, просроченных задачах или комментариях коллег.</FeatureDescription>
-            </FeatureBox>
-            
-            <FeatureBox>
-              <FeatureTitle>Мобильная отчетность и дашборды</FeatureTitle>
-              <FeatureDescription>Смотрите ключевые показатели по рассрочкам, выполняйте план и отслеживайте динамику в простых и наглядных графиках прямо с телефона.</FeatureDescription>
-            </FeatureBox>
-            
-            <FeatureBox>
-              <FeatureTitle>Легкое делегирование задач коллегам</FeatureTitle>
-              <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
-            </FeatureBox>
-          </FeaturesGrid>
-        </ContentContainer>
-      </HeroContent>
-    </HeroContainer>
+            <FeaturesGrid>
+              <FeatureBox>
+                <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
+                <FeatureDescription>Никакой потери данных и всегда актуальная информация под рукой, где бы вы ни были.</FeatureDescription>
+              </FeatureBox>
+              
+              <FeatureBox>
+                <FeatureTitle>Мгновенные push-уведомления</FeatureTitle>
+                <FeatureDescription>Моментальные оповещения о новых лидах, смене статуса сделки, просроченных задачах или комментариях коллег.</FeatureDescription>
+              </FeatureBox>
+              
+              <FeatureBox>
+                <FeatureTitle>Мобильная отчетность и дашборды</FeatureTitle>
+                <FeatureDescription>Смотрите ключевые показатели по рассрочкам, выполняйте план и отслеживайте динамику в простых и наглядных графиках прямо с телефона.</FeatureDescription>
+              </FeatureBox>
+              
+              <FeatureBox>
+                <FeatureTitle>Легкое делегирование задач коллегам</FeatureTitle>
+                <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
+              </FeatureBox>
+            </FeaturesGrid>
+          </ContentContainer>
+        </HeroContent>
+      </HeroContainer>
+    </>
   );
 };
 

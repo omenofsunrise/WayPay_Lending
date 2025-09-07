@@ -15,6 +15,8 @@ const getDaysUntilNewYear = (): number => {
 const HeroContainer = styled.section`
   padding: 40px 0;
   text-align: center;
+  background: #2CA5AD;
+
   @media (max-width: 768px) {
     padding: 0 20px;
   }
@@ -23,7 +25,7 @@ const HeroContainer = styled.section`
 const Title = styled.h1`
   font-size: 3rem;
   font-weight: 700;
-  color: black;
+  color: white;
   margin-bottom: 30px;
   
   @media (max-width: 768px) {
@@ -87,25 +89,29 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <HeroContainer>
-        <Title>Удобное хранение договоров</Title>
-        
-        <ContentContainer>
-          <Description>
-            WayPay - современное решение для автоматизации учёта рассрочек, 
-            клиентов и финансов вашего бизнеса. Переходите на цифровой формат 
-            работы уже сегодня!
-          </Description>
+        <Layout backgroundColor='#2CA5AD'>
           
-          <PromotionText>
-            Осталось <DaysHighlight>{daysLeft} дней</DaysHighlight> до конца акции
-          </PromotionText>
+
+          <Title>Удобное храние и управление договорами</Title>
           
-          <GradientButton onClick={handleOpenModal}>
-            Узнать больше
-          </GradientButton>
-        </ContentContainer>
+          <ContentContainer>
+            <Description>
+              WayPay - современное решение для автоматизации учёта рассрочек, 
+              клиентов и финансов вашего бизнеса. Переходите на цифровой формат 
+              работы уже сегодня!
+            </Description>
+            
+            <PromotionText>
+              Осталось <DaysHighlight>{daysLeft} дней</DaysHighlight> до конца акции
+            </PromotionText>
+            
+            <GradientButton onClick={handleOpenModal}>
+              Узнать больше
+            </GradientButton>
+          </ContentContainer>
+        </Layout>
       </HeroContainer>
 
       <RequestModal
@@ -114,7 +120,7 @@ const Hero: React.FC = () => {
         onSubmit={handleSubmitForm}
         title="Узнать больше о WayPay"
       />
-    </Layout>
+    </>
   );
 };
 

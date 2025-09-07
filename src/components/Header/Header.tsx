@@ -130,61 +130,6 @@ const PhoneIcon = () => (
   </svg>
 );
 
-const MenuIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 12H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M3 6H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M3 18H21" stroke="#2D3436" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-interface MobileMenuProps {
-  $isOpen: boolean;
-}
-
-const MobileMenu = styled.div<MobileMenuProps>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 70%;
-  height: 100vh;
-  background: white;
-  z-index: 1000;
-  padding: 80px 24px 24px;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transform: translateX(${props => props.$isOpen ? '0' : '100%'});
-  transition: transform 0.3s ease;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-`;
-
-interface OverlayProps {
-  $isOpen: boolean;
-}
-
-const Overlay = styled.div<OverlayProps>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: ${props => props.$isOpen ? 'block' : 'none'};
-`;
-
 interface HeaderProps {
   onApplicationClick?: () => void;
   onPhoneClick?: () => void;
@@ -240,8 +185,8 @@ const Header: React.FC<HeaderProps> = ({
     <>
       <HeaderContainer className={className}>        
         <LogoContainer>
-          <Logo src="/Vector1.svg" alt="Logo" />
-          <LogoText src="/Vector2.svg" alt="Company Name" />
+          <Logo src="/Logo.svg" alt="Logo" />
+          <LogoText src="/LogoText.svg" alt="WayPay" />
         </LogoContainer>
         
         <NavContainer>

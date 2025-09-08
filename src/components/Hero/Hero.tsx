@@ -45,12 +45,24 @@ const ImageContainer = styled.div`
   }
 `;
 
-const MacbookImage = styled.img`
+const MacbookDesktop = styled.img`
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   
   @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const MacbookMobile = styled.img`
+  display: none;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  
+  @media (max-width: 768px) {
+    display: block;
     max-width: 80%;
   }
 `;
@@ -211,10 +223,8 @@ const Hero: React.FC = () => {
       <HeroContainer>
           <HeroContent>
             <ImageContainer>
-              <MacbookImage 
-                src="/Images/macbook-pro.png" 
-                alt="WayPay на Macbook Pro" 
-              />
+              <MacbookDesktop src="/Images/macbook-pro.png" alt="WayPay на Macbook Pro" />
+              <MacbookMobile src="/Images/cut-macbook-pro.png" alt="WayPay на мобильном" />
             </ImageContainer>
             <TextContainer>
               <Title>Удобное хранение и управление договорами</Title>

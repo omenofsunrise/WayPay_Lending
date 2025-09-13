@@ -181,7 +181,6 @@ const IconWrapper = styled.span`
   }
 `;
 
-// Исправленная иконка телефона
 const PhoneIcon = () => (
   <IconWrapper>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

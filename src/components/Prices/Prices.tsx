@@ -33,10 +33,7 @@ const PricingBox = styled.div<{ $isPromo?: boolean }>`
   transform: ${props => props.$isPromo ? 'scale(1.05)' : 'none'};
   
   @media (max-width: 768px) {
-    width: 100%;
-    max-width: 320px;
-    transform: none;
-    margin-bottom: 0;
+    width: 70%;
   }
 `;
 
@@ -71,12 +68,20 @@ const DaysLeft = styled.div`
   font-size: 25px;
   margin: 80px 0;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
 `;
 
 const PromoTitle = styled.h3`
   font-size: 20px;
   margin: 10px 0;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+  }
 `;
 
 const PromoDescription = styled.p`
@@ -84,6 +89,10 @@ const PromoDescription = styled.p`
   text-align: center;
   margin-bottom: 0;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const ApplyButton = styled(Button)`

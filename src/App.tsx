@@ -10,6 +10,7 @@ import PrivacyPolicy from './Pages/PrivacyPolicy';
 import Mobile from './components/Mobile/Mobile';
 import Prices from './components/Prices/Prices';
 import { ScrollProvider, useScroll } from './contexts/ScrollContext';
+import Contacts from './components/Contacts';
 
 const MainPage: React.FC = () => {
   const { sections } = useScroll();
@@ -31,6 +32,7 @@ const MainPage: React.FC = () => {
         <div ref={sections.application}>
           <Mobile />
         </div>
+        <Contacts />
         <RequestForm />
       </div>
       <Footer />

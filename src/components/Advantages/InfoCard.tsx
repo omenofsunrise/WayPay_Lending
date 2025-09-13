@@ -45,7 +45,7 @@ const Icon = styled.div`
 `;
 
 const Title = styled.h3`
-  font-size: clamp(1.7rem, 4vw, 1.8rem);
+  font-size: clamp(1.7rem, 4vw, 1.6rem);
   font-weight: 600;
   color: black;
   line-height: 1.3;
@@ -63,7 +63,7 @@ const Title = styled.h3`
 
 const Description = styled.p`
   margin: 0;
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 3vw, 1.2rem);
   color: #666;
   line-height: 1.5;
   text-align: left;

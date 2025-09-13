@@ -151,6 +151,76 @@ const ButtonContent = styled.div`
   justify-content: center;
 `;
 
+const ContactInfo = styled.div`
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
+`;
+
+const ContactTitle = styled.h3`
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  color: #555;
+`;
+
+const ContactLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+`;
+
+const ContactLink = styled.a`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007d88;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #005a63;
+    text-decoration: underline;
+  }
+`;
+
+const Icon = styled.span`
+  margin-right: 8px;
+  font-size: 1.2rem;
+`;
+
+const IconWrapper = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5px;
+
+  @media (max-width: 480px) {
+    transform: scale(0.8);
+  }
+`;
+
+const PhoneIcon = () => (
+  <IconWrapper>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
+  </IconWrapper>
+);
+
+const EmailIcon = () => (
+  <IconWrapper>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+    </svg>
+  </IconWrapper>
+);
+
 interface RequestModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -341,6 +411,20 @@ const RequestModal: React.FC<RequestModalProps> = ({
               {message.text}
             </Message>
           )}
+
+          <ContactInfo>
+            <ContactTitle>Или свяжитесь с нами напрямую:</ContactTitle>
+            <ContactLinks>
+              <ContactLink href="mailto:ya@eliphanov.ru">
+                <EmailIcon />
+                ya@eliphanov.ru
+              </ContactLink>
+              <ContactLink href="tel:+79899242424">
+                <PhoneIcon />
+                +7 989 924 24 24
+              </ContactLink>
+            </ContactLinks>
+          </ContactInfo>
         </Form>
       </ModalContainer>
     </ModalOverlay>

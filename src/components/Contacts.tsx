@@ -5,7 +5,7 @@ const SimpleContactSection = styled.section`
   padding: 60px 20px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   text-align: center;
-  
+
   @media (max-width: 768px) {
     padding: 40px 15px;
   }
@@ -46,7 +46,8 @@ const PhoneLink = styled.a`
   border-radius: 50px;
   transition: all 0.3s ease;
   margin-bottom: 20px;
-  
+  margin: 20px;
+
   &:hover {
     background-color: #007D88;
     color: white;
@@ -55,8 +56,8 @@ const PhoneLink = styled.a`
   }
   
   @media (max-width: 768px) {
-    font-size: 22px;
-    padding: 12px 25px;
+    font-size: 12px;
+    padding: 5px 25px;
   }
 `;
 
@@ -79,6 +80,9 @@ const Contacts = () => {
       </Description>
       <PhoneLink href="tel:+79899242424">
         +7 (989) 924-24-24
+      </PhoneLink>
+      <PhoneLink href="tel:+79899202020">
+        +7 (989) 920-20-20
       </PhoneLink>
     </SimpleContactSection>
   );

@@ -32,7 +32,9 @@ const MainPage: React.FC = () => {
         <div ref={sections.application}>
           <Mobile />
         </div>
-        <Contacts />
+        <div ref={sections.contacts}>
+          <Contacts />
+        </div>
         <RequestForm />
       </div>
       <Footer />

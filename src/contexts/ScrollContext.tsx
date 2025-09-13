@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, use, useContext, useRef } from 'react';
 
 interface ScrollContextType {
   sections: {
@@ -6,6 +6,7 @@ interface ScrollContextType {
     features: React.RefObject<HTMLDivElement | null>;
     application: React.RefObject<HTMLDivElement | null>;
     tarif: React.RefObject<HTMLDivElement | null>;
+    contacts: React.RefObject<HTMLDivElement | null>;
   };
   scrollToSection: (section: string) => void;
 }
@@ -25,13 +26,15 @@ export const ScrollProvider: React.FC<{children: React.ReactNode}> = ({ children
   const featuresRef = useRef<HTMLDivElement>(null);
   const applicationRef = useRef<HTMLDivElement>(null);
   const tarifRef = useRef<HTMLDivElement>(null);
+  const contactsRef = useRef<HTMLDivElement>(null);
 
   const scrollToSection = (section: string) => {
     const sections = {
       home: homeRef,
       features: featuresRef,
       application: applicationRef,
-      tarif: tarifRef
+      tarif: tarifRef,
+      contacts: contactsRef
     };
 
     const sectionRef = sections[section as keyof typeof sections];
@@ -48,7 +51,8 @@ export const ScrollProvider: React.FC<{children: React.ReactNode}> = ({ children
       home: homeRef,
       features: featuresRef,
       application: applicationRef,
-      tarif: tarifRef
+      tarif: tarifRef,
+      contacts: contactsRef
     },
     scrollToSection
   };

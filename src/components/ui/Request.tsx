@@ -421,7 +421,11 @@ const RequestModal: React.FC<RequestModalProps> = ({
               </ContactLink>
               <ContactLink href="tel:+79899242424">
                 <PhoneIcon />
-                +7 989 924 24 24
+                +7 (989) 924-24-24
+              </ContactLink>
+              <ContactLink href="tel:+79899202020">
+                <PhoneIcon />
+                +7 (989) 920-20-20
               </ContactLink>
             </ContactLinks>
           </ContactInfo>

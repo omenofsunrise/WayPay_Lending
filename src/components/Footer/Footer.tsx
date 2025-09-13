@@ -222,7 +222,11 @@ const Footer: React.FC = () => {
           <ContactSection>
             <ContactItem href="tel:+79899242424">
               <PhoneIcon />
-              +7 989 924 24 24
+              +7 (989) 924-24-24
+            </ContactItem>
+            <ContactItem href="tel:+79899202020">
+              <PhoneIcon />
+              +7 (989) 920-20-20
             </ContactItem>
             <ContactItem href="mailto:ya@eliphanov.ru">
               <EmailIcon />

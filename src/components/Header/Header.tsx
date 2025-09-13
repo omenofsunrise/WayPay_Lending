@@ -131,7 +131,12 @@ const ApplyButton = styled(Button)`
 `;
 
 const PhoneButton = styled(Button)`
-  margin-top: 55px;
+  margin-right: 10px;
+
+  @media (max-width: 768px) {
+    margin-top: 55px;
+    margin-right: 0;
+  }
 `;
 
 const PhoneIcon = () => (
@@ -213,6 +218,7 @@ const Header: React.FC<HeaderProps> = ({
           <NavButton onClick={() => handleNavClick('features')}>Возможности</NavButton>
           <NavButton onClick={() => handleNavClick('tarif')}>Цены</NavButton>
           <NavButton onClick={() => handleNavClick('application')}>Приложение</NavButton>
+          <NavButton onClick={() => handleNavClick('contacts')}>Контакты</NavButton>
         </NavContainer>
         
         <ButtonsContainer>
@@ -221,9 +227,14 @@ const Header: React.FC<HeaderProps> = ({
               <PhoneIcon />
             </PhoneButton>
           ) : (
-            <ApplyButton onClick={handleOpenModal}>
-              Оставить заявку
-            </ApplyButton>
+            <>
+              <PhoneButton onClick={onPhoneClick || handleOpenModal}>
+                <PhoneIcon />
+              </PhoneButton>
+              <ApplyButton onClick={handleOpenModal}>
+                Оставить заявку
+              </ApplyButton>
+            </>
           )}
         </ButtonsContainer>
       </HeaderContainer>

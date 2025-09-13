@@ -13,6 +13,7 @@ const StyledTitle = styled.h1<{ $color?: string }>`
   font-style: bold;
   margin: 0;
   padding: 0;
+  text-align: center;
 
   @media (max-width: 768px) {
     font-size: 1.7rem;

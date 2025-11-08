@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Title from '../ui/Title';
 import { useMediaQuery } from 'react-responsive';
+import DownloadBox from './DownloadBox';
 
 const HeroContainer = styled.section`
   padding: 0 380px 50px 0;
@@ -132,11 +133,11 @@ const FeatureBox = styled.div`
 `;
 
 const FeatureTitle = styled.h3`
-  font-size: clamp(1.875rem, 1.25rem + 1.0417vw, 2rem);
+  font-size: clamp(1.875rem, 1.25rem + 1.0417vw, 1.5rem);
   font-weight: 600;
   text-align: center;
   color: black;
-  margin: 0 0 15px;
+  margin: 0;
 
   @media (max-width: 1024px) {
     font-size: 30px;
@@ -149,7 +150,7 @@ const FeatureTitle = styled.h3`
 
 const FeatureDescription = styled.p`
   text-align: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 400;
   color: black;
   line-height: 1.4;
@@ -202,6 +203,25 @@ const Mobile: React.FC = () => {
                 <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
               </FeatureBox>
             </FeaturesGrid>
+            <div style={{ 
+              display: "flex", 
+              gap: "20px", 
+              flexDirection: window.innerWidth <= 410 ? "column" : "row",
+              alignItems: window.innerWidth <= 410 ? "center" : "flex-start"
+            }}>
+              <DownloadBox
+                iconSrc="/Logos/markets/AppStore.svg" 
+                platformName="App Store"
+                onClick={() => window.open('https://apps.apple.com/us/app/waypay/id6752306977', '_blank')}
+              />
+            <div style={{ marginLeft: window.innerWidth <= 410 ? 0 : "auto" }}>
+                <DownloadBox 
+                  iconSrc="/Logos/markets/Rustore.svg" 
+                  platformName="RuStore"
+                  onClick={() => window.open('https://www.rustore.ru/catalog/app/one.waypay.mobile', '_blank')}
+                />
+              </div>
+            </div>
           </ContentContainer>
         </HeroContent>
       </HeroContainer>
@@ -222,9 +242,7 @@ const Mobile: React.FC = () => {
             />
           </ImageContainer>
 
-          <ContentContainer>
-            <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
-            
+          <ContentContainer>           
             <FeaturesGrid>
               <FeatureBox>
                 <FeatureTitle>Мгновенная синхронизация между всеми устройствами</FeatureTitle>
@@ -246,6 +264,27 @@ const Mobile: React.FC = () => {
                 <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
               </FeatureBox>
             </FeaturesGrid>
+            
+            <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
+            <div style={{ display: "flex", gap: "38px"}}>
+              {/* <DownloadBox 
+                iconSrc="/Logos/markets/GooglePlay.svg" 
+                platformName="Google Play"
+                onClick={() => window.open('https://apps.apple.com/your-app-link', '_blank')}
+              /> */}
+
+              <DownloadBox
+                iconSrc="/Logos/markets/AppStore.svg" 
+                platformName="App Store"
+                onClick={() => window.open('https://apps.apple.com/us/app/waypay/id6752306977', '_blank')}
+              />
+
+              <DownloadBox 
+                iconSrc="/Logos/markets/Rustore.svg" 
+                platformName="RuStore"
+                onClick={() => window.open('https://www.rustore.ru/catalog/app/one.waypay.mobile', '_blank')}
+              />
+            </div>
           </ContentContainer>
         </HeroContent>
       </HeroContainer>

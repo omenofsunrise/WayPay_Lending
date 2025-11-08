@@ -218,6 +218,103 @@ const Description = styled.p`
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  padding: 18px 28px;
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: rgba(0, 125, 136, 1);
+  border: none;
+  border-radius: 10px;
+  border: solid 1px white;
+  padding: 18px 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 14px 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 12px 18px;
+    border-radius: 10px;
+  }
+`;
+
+const ButtonIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28px;
+  
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    margin-right: 14px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+`;
+
+const ButtonTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const ButtonTextTop = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const ButtonTextBottom = styled.span`
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+  line-height: 1.2;
+  
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+`;
+
 const Hero: React.FC = () => {
   return (
       <HeroContainer>
@@ -235,6 +332,18 @@ const Hero: React.FC = () => {
                 <br />
                 Переходите на цифровой формат работы уже сегодня!
               </Description>
+
+              <ButtonContainer>
+                <StyledButton onClick={() => window.open('https://web.waypay.one', '_blank')}>
+                  <ButtonIcon>
+                    <img src="/Logos/Logo.svg" alt="icon" />
+                  </ButtonIcon>
+                  <ButtonTextContainer>
+                    <ButtonTextTop>Перейти в</ButtonTextTop>
+                    <ButtonTextBottom>WayPay CRM</ButtonTextBottom>
+                  </ButtonTextContainer>
+                </StyledButton>
+              </ButtonContainer>
             </TextContainer>
         
           </HeroContent>

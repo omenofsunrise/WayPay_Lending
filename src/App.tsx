@@ -11,6 +11,8 @@ import Mobile from './components/Mobile/Mobile';
 import Prices from './components/Prices/Prices';
 import { ScrollProvider, useScroll } from './contexts/ScrollContext';
 import Contacts from './components/Contacts';
+import About from './components/about';
+import Mission from './components/Mission';
 
 const MainPage: React.FC = () => {
   const { sections } = useScroll();
@@ -21,6 +23,12 @@ const MainPage: React.FC = () => {
       <div className="main-content">
         <div ref={sections.home}>
           <Hero />
+        </div>
+        <div >
+          <About />
+        </div>
+        <div >
+          <Mission />
         </div>
         <div ref={sections.features}>
           <Advantages />

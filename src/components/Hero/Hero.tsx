@@ -223,8 +223,8 @@ const ButtonContainer = styled.div`
   justify-content: flex-start;
   padding: 18px 28px;
   
-  @media (max-width: 768px) {
-    justify-content: center;
+  @media (max-width: 1080px) {
+    display: none;
   }
 `;
 

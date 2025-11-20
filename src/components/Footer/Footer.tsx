@@ -253,9 +253,9 @@ const Footer: React.FC = () => {
               <SectionTitle>Основные контакты</SectionTitle>
               <ContactItem>
                 <ContactLabel>Электронная почта</ContactLabel>
-                <ContactValue href="mailto:ya@eliphanov.ru">
+                <ContactValue href="mailto:info@waypay.one">
                   <EmailIcon />
-                  ya@eliphanov.ru
+                  info@waypay.one
                 </ContactValue>
               </ContactItem>
               <ContactItem>

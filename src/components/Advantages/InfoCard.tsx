@@ -52,7 +52,7 @@ const Title = styled.h3`
   margin: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: manual; /* Изменено с auto на manual */
+  hyphens: manual;
   
   @media (max-width: 480px) {
     margin-left: 0;

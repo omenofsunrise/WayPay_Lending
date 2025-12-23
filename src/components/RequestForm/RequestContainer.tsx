@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import GradientButton from '../ui/buttons/GradientButton';
 import Button from '../ui/buttons/Button';
 
 const Container = styled.div`

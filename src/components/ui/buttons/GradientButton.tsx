@@ -20,7 +20,6 @@ const StyledButton = styled.button<{
   $size?: 'small' | 'medium' | 'large' | 'xlarge';
   $fullWidth?: boolean;
 }>`
-  // Базовые стили
   background: ${props => props.$disabled 
     ? props.$backgroundColor || '#cccccc' 
     : props.$backgroundColor || 'linear-gradient(90deg, rgba(0, 125, 136, 1) 0%, rgba(37, 203, 161, 1) 100%)'};
@@ -44,13 +43,11 @@ const StyledButton = styled.button<{
   letter-spacing: 0.02em;
   font-family: inherit;
   
-  // Увеличенные размеры для десктопа
   padding: 24px 48px;
   font-size: 1.5rem;
   min-height: 80px;
   min-width: 200px;
   
-  // Размеры варианты
   ${props => props.$size === 'small' && css`
     padding: 12px 24px;
     font-size: 1rem;
@@ -87,16 +84,13 @@ const StyledButton = styled.button<{
     gap: 16px;
   `}
   
-  // Полная ширина
   ${props => props.$fullWidth && css`
     width: 100%;
     max-width: 100%;
   `}
   
-  // Состояние disabled
   opacity: ${props => props.$disabled ? 0.6 : 1};
   
-  // Анимация ripple effect
   &::after {
     content: '';
     position: absolute;
@@ -110,7 +104,6 @@ const StyledButton = styled.button<{
     transition: width 0.4s ease, height 0.4s ease;
   }
 
-  // Hover эффекты для устройств с поддержкой hover
   @media (hover: hover) and (pointer: fine) {
     &:hover:not(:disabled) {
       transform: translateY(-3px);
@@ -133,18 +126,15 @@ const StyledButton = styled.button<{
     }
   }
 
-  // Активное состояние для touch устройств
   &:active:not(:disabled) {
     transform: scale(0.98);
   }
 
-  // Фокус для accessibility
   &:focus-visible {
     outline: 4px solid ${props => props.$textColor || '#ffffff'}40;
     outline-offset: 3px;
   }
 
-  // Ноутбуки и маленькие десктопы
   @media (max-width: 1440px) {
     padding: 20px 40px;
     font-size: 1.3rem;
@@ -180,7 +170,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Планшеты в ландшафтной ориентации
   @media (max-width: 1024px) {
     padding: 18px 36px;
     font-size: 1.2rem;
@@ -217,7 +206,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Планшеты в портретной ориентации и большие мобильные
   @media (max-width: 768px) {
     padding: 16px 32px;
     font-size: 1.1rem;
@@ -259,7 +247,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Мобильные устройства
   @media (max-width: 480px) {
     padding: 14px 28px;
     font-size: 1rem;
@@ -301,7 +288,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Маленькие мобильные устройства
   @media (max-width: 360px) {
     padding: 12px 24px;
     font-size: 0.9rem;
@@ -338,7 +324,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Ландшафтная ориентация на мобильных
   @media (max-height: 480px) and (orientation: landscape) {
     padding: 10px 20px;
     font-size: 0.85rem;
@@ -374,7 +359,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Очень большие экраны (4K и выше)
   @media (min-width: 2560px) {
     padding: 32px 64px;
     font-size: 2rem;
@@ -410,7 +394,6 @@ const StyledButton = styled.button<{
     `}
   }
 
-  // Отключение анимаций
   @media (prefers-reduced-motion: reduce) {
     transition: none;
     
@@ -423,7 +406,6 @@ const StyledButton = styled.button<{
     }
   }
 
-  // Темная тема
   @media (prefers-color-scheme: dark) {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     

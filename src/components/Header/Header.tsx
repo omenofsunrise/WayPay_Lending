@@ -106,7 +106,7 @@ const NavButton = styled.button`
 const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 120px; /* Отступ справа для кнопки */
+  margin-right: 120px;
   
   @media (max-width: 1024px) {
     margin-right: 60px;
@@ -114,7 +114,7 @@ const ButtonsContainer = styled.div`
   
   @media (max-width: 768px) {
     margin-right: 0;
-    margin-left: auto; /* Кнопка справа на мобильных */
+    margin-left: auto;
   }
 `;
 

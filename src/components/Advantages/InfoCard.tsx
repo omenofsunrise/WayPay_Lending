@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 const Container = styled.div`
   background-color: white;
@@ -71,7 +72,7 @@ const Description = styled.p`
   overflow-wrap: break-word;
   hyphens: manual;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     text-align: justify;
   }
 `;

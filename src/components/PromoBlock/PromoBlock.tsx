@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
 import Layout from '../ui/Layout';
+import { media } from '../../styles/breakpoints';
 
 const PromoContainer = styled.div`
   background: linear-gradient(160deg, rgba(0, 125, 136, 1), rgba(37, 203, 161, 1));
@@ -14,7 +15,7 @@ const PromoContainer = styled.div`
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     border-radius: 16px;
     padding: 0 16px;
     margin: 5px 20px;

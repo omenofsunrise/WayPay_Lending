@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../styles/breakpoints';
 
 const SimpleContactSection = styled.section`
   padding: 60px 20px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   text-align: center;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 40px 15px;
   }
 `;
@@ -17,7 +18,7 @@ const Heading = styled.h2`
   color: #007D88;
   margin-bottom: 20px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 26px;
   }
 `;
@@ -30,7 +31,7 @@ const Description = styled.p`
   margin-left: auto;
   margin-right: auto;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 16px;
   }
 `;
@@ -55,7 +56,7 @@ const PhoneLink = styled.a`
     box-shadow: 0 5px 15px rgba(0, 125, 136, 0.2);
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 12px;
     padding: 5px 25px;
   }
@@ -66,7 +67,7 @@ const AdditionalInfo = styled.p`
   color: #888;
   margin-top: 20px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 14px;
   }
 `;

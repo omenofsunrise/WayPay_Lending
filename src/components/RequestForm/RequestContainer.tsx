@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
+import { media } from '../../styles/breakpoints';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -17,7 +18,7 @@ const FieldGroup = styled.div`
   position: relative;
   margin-top: 20px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 0 10px;
   }
 `;
@@ -26,7 +27,7 @@ const Row = styled.div`
   display: flex;
   gap: 20px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
     gap: 20px;
   }

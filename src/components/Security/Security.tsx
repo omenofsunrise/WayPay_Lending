@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SecurityItem, { SecurityItemProps } from './SecurityItem';
 import Title from '../ui/Title';
 import Layout from '../ui/Layout';
+import { media } from '../../styles/breakpoints';
 
 const Security: React.FC = () => {
   const securityItems: SecurityItemProps[] = [
@@ -67,7 +68,7 @@ const CertificateIcon = () => (
 );
 
 const SecurityContainer = styled.section`
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin: 25px 20px;
   }
 `;

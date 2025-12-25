@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 const FooterContainer = styled.footer`
   background: rgba(0, 125, 136, 0.1);
@@ -26,7 +27,7 @@ const MainContent = styled.div`
     gap: 40px;
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
     gap: 30px;
     align-items: center;
@@ -79,7 +80,7 @@ const ContactSection = styled.div`
     margin-right: 0;
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     text-align: center;
     gap: 20px;
     flex-direction: column;
@@ -110,7 +111,7 @@ const ContactItem = styled.a`
     font-size: 18px;
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 16px;
     justify-content: center;
   }
@@ -137,7 +138,7 @@ const BottomSection = styled.div`
   flex-wrap: wrap;
   gap: 20px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
     gap: 15px;
     text-align: center;

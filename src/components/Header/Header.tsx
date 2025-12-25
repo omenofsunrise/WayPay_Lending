@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
 import { useScroll } from '../../contexts/ScrollContext';
@@ -15,7 +16,7 @@ const HeaderContainer = styled.header`
   z-index: 100;
   height: 50px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     height: 0px;
     padding: 0 20px;
     background-color: transparent;
@@ -31,11 +32,11 @@ const LogoContainer = styled.div`
   gap: 12px;
   margin-left: 120px;
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     margin-left: 60px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin-left: 0;
   }
 `;
@@ -44,7 +45,7 @@ const Logo = styled.img`
   height: 50px;
   width: auto;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     height: 32px;
   }
 `;
@@ -53,7 +54,7 @@ const LogoText = styled.img`
   height: 40px;
   width: auto;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     height: 24px;
   }
 `;
@@ -66,11 +67,11 @@ const NavContainer = styled.nav`
   left: 50%;
   transform: translateX(-50%);
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     gap: 24px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     display: none;
   }
 `;
@@ -108,11 +109,11 @@ const ButtonsContainer = styled.div`
   align-items: center;
   margin-right: 120px;
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     margin-right: 60px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin-right: 0;
     margin-left: auto;
   }
@@ -133,7 +134,7 @@ const ApplyButton = styled(Button)`
 const PhoneButton = styled(Button)`
   margin-right: 10px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin-top: 55px;
     margin-right: 0;
   }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 interface TitleProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ const StyledTitle = styled.h1<{ $color?: string }>`
   padding: 0;
   text-align: center;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 1.7rem;
     padding: 0 10px;
   }

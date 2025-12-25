@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -19,16 +20,16 @@ const responsivePadding = css<Omit<LayoutProps, 'children' | 'className'>>`
   padding: ${({ padding = '50px 380px' }) => padding};
 
   ${({ padding }) => !padding && css`
-    @media (max-width: 1920px) { padding: 40px 300px; }
-    @media (max-width: 1440px) { padding: 35px 200px; }
-    @media (max-width: 1024px) { padding: 30px 100px; }
-    @media (max-width: 768px) { padding: 10px; }
+    ${media.down('xl')} { padding: 40px 300px; }
+    ${media.down('lg')} { padding: 35px 200px; }
+    ${media.down('xm')} { padding: 30px 100px; }
+    ${media.down('sm')} { padding: 10px; }
   `}
 
   ${({ padding }) => padding && css`
-    @media (max-width: 1024px) { padding: calc(${padding} * 0.7); }
-    @media (max-width: 768px) { padding: calc(${padding} * 0.5); }
-    @media (max-width: 576px) { padding: calc(${padding} * 0.3); }
+    ${media.down('xm')} { padding: calc(${padding} * 0.7); }
+    ${media.down('sm')} { padding: calc(${padding} * 0.5); }
+    ${media.down('xs')} { padding: calc(${padding} * 0.35); }
   `}
 `;
 

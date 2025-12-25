@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 const DownloadBoxContainer = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const DownloadBoxContainer = styled.div`
     transform: translateY(0);
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     max-width: 100%;
     padding: 14px 16px;
     margin: 6px 8px;
@@ -46,7 +47,7 @@ const IconWrapper = styled.div`
   height: 32px;
   flex-shrink: 0;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     width: 28px;
     height: 28px;
     margin-right: 12px;
@@ -78,7 +79,7 @@ const DownloadText = styled.span`
   opacity: 0.9;
   margin-bottom: 2px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 13px;
   }
 
@@ -91,7 +92,7 @@ const PlatformText = styled.span`
   font-size: 18px;
   font-weight: 600;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 16px;
   }
 

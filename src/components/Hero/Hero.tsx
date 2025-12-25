@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 const HeroContainer = styled.section`
   padding: 10px 0 30px 0;
@@ -7,7 +8,7 @@ const HeroContainer = styled.section`
   position: relative;
   overflow: hidden;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 40px 0 0;
   }
 `;
@@ -20,7 +21,7 @@ const HeroContent = styled.div`
   max-width: 1920px;
   margin: 0 auto;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
   }
 `;
@@ -32,11 +33,11 @@ const ImageContainer = styled.div`
   z-index: 1;
   order: 1;
   max-height: 600px;
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     flex: 0 0 55%;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex: 0 0 auto;
     justify-content: center;
     margin-bottom: 30px;
@@ -50,7 +51,7 @@ const MacbookDesktop = styled.img`
   height: auto;
   border-radius: 8px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     display: none;
   }
 `;
@@ -61,7 +62,7 @@ const MacbookMobile = styled.img`
   height: auto;
   border-radius: 8px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     display: block;
     max-width: 80%;
   }
@@ -75,12 +76,12 @@ const TextContainer = styled.div`
   margin-top: -5%;
   order: 2;
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     flex: 0 0 50%;
     margin-left: -8%;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex: 1;
     margin: 0 auto;
     width: 100%;
@@ -109,16 +110,16 @@ const Title = styled.h1`
   margin-bottom: 30px;
   line-height: 1.2;
   
-  @media (max-width: 1440px) {
+  ${media.down('lg')} {
     font-size: 35px;
   }
   
-  @media (max-width: 1200px) {
+  ${media.down('md')} {
     font-size: 30px;
     padding-right: 90px;
   }
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     font-size: 25px;
     margin-bottom: 25px;
   }
@@ -127,7 +128,7 @@ const Title = styled.h1`
     font-size: 22px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 2.2rem;
     margin-bottom: 20px;
     text-align: center;
@@ -153,7 +154,7 @@ const Title = styled.h1`
     margin-bottom: 12px;
   }
   
-  @media (max-width: 320px) {
+  ${media.down('xs')} {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
@@ -166,19 +167,19 @@ const Description = styled.p`
   line-height: 1.6;
   margin-bottom: 30px;
   
-  @media (max-width: 1440px) {
+  ${media.down('lg')} {
     font-size: 28px;
   }
     
-  @media (max-width: 1440px) {
+  ${media.down('lg')} {
     font-size: 28px;
   }
   
-  @media (max-width: 1200px) {
+  ${media.down('md')} {
     font-size: 24px;
   }
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     font-size: 20px;
     margin-bottom: 25px;
   }
@@ -187,7 +188,7 @@ const Description = styled.p`
     font-size: 18px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 1.1rem;
     text-align: center;
     line-height: 1.5;
@@ -211,7 +212,7 @@ const Description = styled.p`
     margin-bottom: 12px;
   }
   
-  @media (max-width: 320px) {
+  ${media.down('xs')} {
     font-size: 0.85rem;
     margin-bottom: 10px;
     line-height: 1.35;
@@ -249,7 +250,7 @@ const StyledButton = styled.button`
     transform: translateY(0);
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 14px 20px;
   }
   
@@ -265,7 +266,7 @@ const ButtonIcon = styled.div`
   justify-content: center;
   margin-right: 28px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     width: 28px;
     height: 28px;
     margin-right: 14px;
@@ -291,7 +292,7 @@ const ButtonTextTop = styled.span`
   line-height: 1.2;
   margin-bottom: 12px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 13px;
   }
   
@@ -306,7 +307,7 @@ const ButtonTextBottom = styled.span`
   color: white;
   line-height: 1.2;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 16px;
   }
   

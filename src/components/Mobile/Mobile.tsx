@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Title from '../ui/Title';
 import { useMediaQuery } from 'react-responsive';
 import DownloadBox from './DownloadBox';
+import { breakpoints, media } from '../../styles/breakpoints';
 
 const HeroContainer = styled.section`
   padding: 0 380px 50px 0;
@@ -10,7 +11,7 @@ const HeroContainer = styled.section`
   position: relative;
   overflow: hidden;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 20px 0 40px;
   }
 `;
@@ -21,7 +22,7 @@ const TitleContainer = styled.section`
   overflow: hidden;
   padding-top: 40px;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 40px 0 0;
   }
 `;
@@ -34,7 +35,7 @@ const HeroContent = styled.div`
   max-width: 1920px;
   margin: 0 auto;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
   }
 `;
@@ -47,11 +48,11 @@ const ImageContainer = styled.div`
   max-width: 500px;
   margin-bottom: auto;
 
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     flex: 0 0 55%;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex: 0 0 auto;
     justify-content: center;
     margin-bottom: 30px;
@@ -66,7 +67,7 @@ const MacbookImage = styled.img`
   height: auto;
   border-radius: 8px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     max-width: 80%;
   }
 `;
@@ -77,12 +78,12 @@ const ContentContainer = styled.div`
   padding: 20px 0 20px 20px;
   flex: 1;
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     flex: 0 0 45%;
     margin-left: 20px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex: 0 0 auto;
     margin-left: 0;
     width: 100%;
@@ -97,7 +98,7 @@ const MainText = styled.h2`
   color: black;
   margin-bottom: 40px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 28px;
     margin-bottom: 30px;
     padding: 0 10px;
@@ -109,11 +110,11 @@ const FeaturesGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     grid-template-columns: 1fr;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     grid-template-columns: 1fr;
     padding: 10px;
   }
@@ -125,7 +126,7 @@ const FeatureBox = styled.div`
   padding: 20px;
   background: white;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     border: none;
     background: white;
     box-shadow: 0 0 0 2px rgba(0, 125, 136, 0.1);
@@ -139,11 +140,11 @@ const FeatureTitle = styled.h3`
   color: black;
   margin: 0;
 
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     font-size: 30px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 24px;
   }
 `;
@@ -155,17 +156,17 @@ const FeatureDescription = styled.p`
   color: black;
   line-height: 1.4;
   
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     font-size: 18px;
   }
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 16px;
   }
 `;
 
 const Mobile: React.FC = () => {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: parseInt(breakpoints.sm) });
 
   if (isMobile) {
     return (

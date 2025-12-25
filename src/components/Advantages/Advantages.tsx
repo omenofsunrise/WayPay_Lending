@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import InfoCard from './InfoCard';
 import Title from '../ui/Title';
 import Layout from '../ui/Layout';
+import { media } from '../../styles/breakpoints';
 
 const SectionContainer = styled.section`
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin: 30px 20px;
   }
 `;
@@ -17,7 +18,7 @@ const AdvantagesGrid = styled.div`
   gap: 24px;
   margin-top: 40px;
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin-top: 20px;
     grid-template-columns: 1fr;
   }

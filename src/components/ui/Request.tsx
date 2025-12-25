@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import GradientButton from '../ui/buttons/GradientButton';
+import { media } from '../../styles/breakpoints';
 
 const fadeIn = keyframes`
   from {
@@ -157,7 +158,7 @@ const ContactInfo = styled.div`
   border-top: 1px solid #eee;
   text-align: center;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     margin-top: 0;
   }
 `;

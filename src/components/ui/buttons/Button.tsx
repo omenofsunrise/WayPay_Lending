@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../../styles/breakpoints';
 
 interface ButtonProps {
   backgroundColor?: string;
@@ -76,7 +77,7 @@ const StyledButton = styled.button<{
     outline-offset: 2px;
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     border-radius: 16px;
     padding: 12px 20px;
     font-size: 1.1em;

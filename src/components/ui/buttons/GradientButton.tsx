@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { media } from '../../../styles/breakpoints';
 
 interface ButtonProps {
   backgroundColor?: string;
@@ -135,7 +136,7 @@ const StyledButton = styled.button<{
     outline-offset: 3px;
   }
 
-  @media (max-width: 1440px) {
+  ${media.down('lg')} {
     padding: 20px 40px;
     font-size: 1.3rem;
     min-height: 70px;
@@ -170,7 +171,7 @@ const StyledButton = styled.button<{
     `}
   }
 
-  @media (max-width: 1024px) {
+  ${media.down('xm')} {
     padding: 18px 36px;
     font-size: 1.2rem;
     min-height: 65px;
@@ -206,7 +207,7 @@ const StyledButton = styled.button<{
     `}
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     padding: 16px 32px;
     font-size: 1.1rem;
     min-height: 60px;

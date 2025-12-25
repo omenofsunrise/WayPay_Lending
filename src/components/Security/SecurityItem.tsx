@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { media } from '../../styles/breakpoints';
 
 export interface SecurityItemProps {
   icon: React.ReactNode;
@@ -38,7 +39,7 @@ const Container = styled.div`
   min-height: 100px;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: row;
     padding: 16px;
     gap: 16px;
@@ -65,7 +66,7 @@ const IconWrapper = styled.div`
     height: 100%;
   }
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     width: 40px;
     height: 40px;
     margin-left: 0;
@@ -84,7 +85,7 @@ const TextContent = styled.div`
   text-align: left;
   flex: 1;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     gap: 6px;
   }
 `;
@@ -98,7 +99,7 @@ const Title = styled.h3`
   padding: 0;
   word-wrap: break-word;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 18px;
   }
 
@@ -119,7 +120,7 @@ const Description = styled.p`
   overflow: visible;
   text-overflow: clip;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 14px;
     line-height: 1.3;
   }

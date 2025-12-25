@@ -1,3 +1,4 @@
+import { media } from '../styles/breakpoints';
 const PrivacyPolicy = () => {
   return (
     <div className="privacy-policy">
@@ -116,7 +117,7 @@ const PrivacyPolicy = () => {
           margin: 0;
         }
         
-        @media (max-width: 768px) {
+        ${media.down('sm')} {
           .container {
             padding: 1.5rem;
             margin: 1rem;

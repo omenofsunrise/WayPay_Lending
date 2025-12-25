@@ -4,6 +4,7 @@ import Title from '../ui/Title';
 import Layout from '../ui/Layout';
 import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
+import { media } from '../../styles/breakpoints';
 
 const PricingContainer = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const PricingContainer = styled.div`
   margin: 40px 0 0;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     flex-direction: column;
     align-items: center;
   }
@@ -32,7 +33,7 @@ const PricingBox = styled.div<{ $isPromo?: boolean }>`
   box-shadow: ${props => props.$isPromo ? '0 8px 20px rgba(43, 165, 173, 0.3)' : 'none'};
   transform: ${props => props.$isPromo ? 'scale(1.05)' : 'none'};
   
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     width: 70%;
   }
 `;
@@ -69,7 +70,7 @@ const DaysLeft = styled.div`
   margin: 80px 0;
   text-align: center;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 17px;
   }
 `;
@@ -79,7 +80,7 @@ const PromoTitle = styled.h3`
   margin: 10px 0;
   text-align: center;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 17px;
   }
 `;
@@ -90,7 +91,7 @@ const PromoDescription = styled.p`
   margin-bottom: 0;
   line-height: 1.5;
 
-  @media (max-width: 768px) {
+  ${media.down('sm')} {
     font-size: 13px;
   }
 `;

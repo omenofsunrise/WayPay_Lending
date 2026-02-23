@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { media } from '../../styles/breakpoints';
 
@@ -166,29 +166,61 @@ const OfficesMap: React.FC = () => {
     }
   };
 
-    const initMap = () => {
-        if (!mapRef.current || !window.ymaps) return;
+  const getScheduleHTML = useCallback((schedules: Schedule[]) => {
+    const workingDays = schedules
+      .filter(s => s.isWorking)
+      .sort((a, b) => {
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        return days.indexOf(a.dayOfWeek) - days.indexOf(b.dayOfWeek);
+      });
 
-        try {
-            // Создаем карту
-            yandexMapRef.current = new window.ymaps.Map(mapRef.current, {
-            center: GROZNY_COORDS,
-            zoom: 10,
-            controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
-            });
+    if (workingDays.length === 0) {
+      return '<div style="color: #6c757d; font-size: 13px;">График работы уточняйте по телефону</div>';
+    }
 
-            const clusterer = new window.ymaps.Clusterer({
-                preset: 'islands#invertedVioletClusterIcons',
-                clusterIconColor: '#2CA5AD',
-                clusterDisableClickZoom: false,
-                groupByCoordinates: false,
-                clusterOpenBalloonOnClick: true,
-                clusterIconContentLayout: window.ymaps.templateLayoutFactory.createClass(
-                    '<div style="color: white; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">{{ properties.geoObjects.length }}</div>'
-                ),
-            });
+    const dayNames: { [key: string]: string } = {
+      'Monday': 'Понедельник',
+      'Tuesday': 'Вторник',
+      'Wednesday': 'Среда',
+      'Thursday': 'Четверг',
+      'Friday': 'Пятница',
+      'Saturday': 'Суббота',
+      'Sunday': 'Воскресенье'
+    };
 
-      const placemarks = offices.map((office, index) => {
+    const formatTime = (time: string) => time.substring(0, 5);
+
+    return workingDays.map(day => `
+      <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+        <span style="color: #6c757d;">${dayNames[day.dayOfWeek]}</span>
+        <span style="color: #2CA5AD; font-weight: 500;">${formatTime(day.openTime)} - ${formatTime(day.closeTime)}</span>
+      </div>
+    `).join('');
+  }, []);
+
+  const initMap = useCallback(() => {
+    if (!mapRef.current || !window.ymaps || offices.length === 0) return;
+
+    try {
+      // Создаем карту
+      yandexMapRef.current = new window.ymaps.Map(mapRef.current, {
+        center: GROZNY_COORDS,
+        zoom: 10,
+        controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
+      });
+
+      const clusterer = new window.ymaps.Clusterer({
+        preset: 'islands#invertedVioletClusterIcons',
+        clusterIconColor: '#2CA5AD',
+        clusterDisableClickZoom: false,
+        groupByCoordinates: false,
+        clusterOpenBalloonOnClick: true,
+        clusterIconContentLayout: window.ymaps.templateLayoutFactory.createClass(
+          '<div style="color: white; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">{{ properties.geoObjects.length }}</div>'
+        ),
+      });
+
+      const placemarks = offices.map((office) => {
         const [lat, lng] = office.coordinates.split(',').map(coord => parseFloat(coord.trim()));
         
         const balloonContent = `
@@ -228,50 +260,27 @@ const OfficesMap: React.FC = () => {
           </div>
         `;
 
-    useEffect(() => {
-        const loadYandexMaps = () => {
-            if (window.ymaps) {
-            initMap();
-            return;
-            }
+        const placemark = new window.ymaps.Placemark([lat, lng], {
+          hintContent: office.name,
+          balloonContent: balloonContent,
+          balloonContentBody: balloonContent,
+        }, {
+          iconLayout: 'default#imageWithContent',
+          iconImageHref: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.56 20.82C12.3968 20.9372 12.201 21.0003 12 21.0003C11.7991 21.0003 11.6032 20.9372 11.44 20.82C6.61102 17.378 1.48602 10.298 6.66702 5.182C8.08937 3.78285 10.0049 2.99912 12 3C14 3 15.919 3.785 17.333 5.181C22.514 10.297 17.389 17.376 12.56 20.82Z" fill="#007D88" stroke="#007D88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.2715 7.26367C12.9011 7.32612 13.493 7.60433 13.9443 8.05566C14.4601 8.57139 14.75 9.27065 14.75 10C14.75 10.7293 14.4601 11.4286 13.9443 11.9443C13.4286 12.4601 12.7293 12.75 12 12.75C11.2707 12.75 10.5714 12.4601 10.0557 11.9443C9.53994 11.4286 9.25 10.7293 9.25 10C9.25 9.27065 9.53994 8.57139 10.0557 8.05566C10.5714 7.53994 11.2707 7.25 12 7.25L12.2715 7.26367Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          `),
+          iconImageSize: [24, 24],
+          iconImageOffset: [-12, -24],
+          iconContentOffset: [0, 0],
+          balloonCloseButton: true,
+          balloonMaxWidth: 320,
+          balloonPanelMaxMapArea: Infinity,
+          hideIconOnBalloonOpen: false,
+        });
 
-            const script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
-            script.onload = () => {
-            window.ymaps.ready(initMap);
-            };
-            script.onerror = () => {
-            setError('Не удалось загрузить карту');
-            setIsLoading(false);
-            };
-            document.body.appendChild(script);
-        };
-
-        if (offices.length > 0 && !isLoading) {
-            loadYandexMaps();
-        }
-    }, [offices, isLoading, initMap]);
-
-const placemark = new window.ymaps.Placemark([lat, lng], {
-  hintContent: office.name,
-  balloonContent: balloonContent,
-  balloonContentBody: balloonContent,
-}, {
-  iconLayout: 'default#imageWithContent',
-  iconImageHref: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.56 20.82C12.3968 20.9372 12.201 21.0003 12 21.0003C11.7991 21.0003 11.6032 20.9372 11.44 20.82C6.61102 17.378 1.48602 10.298 6.66702 5.182C8.08937 3.78285 10.0049 2.99912 12 3C14 3 15.919 3.785 17.333 5.181C22.514 10.297 17.389 17.376 12.56 20.82Z" fill="#007D88" stroke="#007D88" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12.2715 7.26367C12.9011 7.32612 13.493 7.60433 13.9443 8.05566C14.4601 8.57139 14.75 9.27065 14.75 10C14.75 10.7293 14.4601 11.4286 13.9443 11.9443C13.4286 12.4601 12.7293 12.75 12 12.75C11.2707 12.75 10.5714 12.4601 10.0557 11.9443C9.53994 11.4286 9.25 10.7293 9.25 10C9.25 9.27065 9.53994 8.57139 10.0557 8.05566C10.5714 7.53994 11.2707 7.25 12 7.25L12.2715 7.26367Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  `),
-  iconImageSize: [24, 24],
-  iconImageOffset: [-12, -24],
-  iconContentOffset: [0, 0],
-  balloonCloseButton: true,
-  balloonMaxWidth: 320,
-  balloonPanelMaxMapArea: Infinity,
-  hideIconOnBalloonOpen: false,
-});
         // Добавляем обработчик открытия балуна для изменения иконки
         placemark.events.add('balloonopen', () => {
           // Можно добавить логику для изменения иконки при открытии
@@ -299,46 +308,38 @@ const placemark = new window.ymaps.Placemark([lat, lng], {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [offices, getScheduleHTML]);
 
-  const getScheduleHTML = (schedules: Schedule[]) => {
-    const workingDays = schedules
-      .filter(s => s.isWorking)
-      .sort((a, b) => {
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        return days.indexOf(a.dayOfWeek) - days.indexOf(b.dayOfWeek);
-      });
+  useEffect(() => {
+    const loadYandexMaps = () => {
+      if (window.ymaps) {
+        window.ymaps.ready(initMap);
+        return;
+      }
 
-    if (workingDays.length === 0) {
-      return '<div style="color: #6c757d; font-size: 13px;">График работы уточняйте по телефону</div>';
-    }
-
-    const dayNames: { [key: string]: string } = {
-      'Monday': 'Понедельник',
-      'Tuesday': 'Вторник',
-      'Wednesday': 'Среда',
-      'Thursday': 'Четверг',
-      'Friday': 'Пятница',
-      'Saturday': 'Суббота',
-      'Sunday': 'Воскресенье'
+      const script = document.createElement('script');
+      script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
+      script.onload = () => {
+        window.ymaps.ready(initMap);
+      };
+      script.onerror = () => {
+        setError('Не удалось загрузить карту');
+        setIsLoading(false);
+      };
+      document.body.appendChild(script);
     };
 
-    const formatTime = (time: string) => time.substring(0, 5);
-
-    return workingDays.map(day => `
-      <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
-        <span style="color: #6c757d;">${dayNames[day.dayOfWeek]}</span>
-        <span style="color: #2CA5AD; font-weight: 500;">${formatTime(day.openTime)} - ${formatTime(day.closeTime)}</span>
-      </div>
-    `).join('');
-  };
+    if (offices.length > 0) {
+      loadYandexMaps();
+    }
+  }, [offices, initMap]);
 
   return (
     <MapContainer id="offices">
       <MapContent>
         <Title>Нами пользуются</Title>
         <Description>
-
+            
         </Description>
         
         <div style={{ position: 'relative' }}>

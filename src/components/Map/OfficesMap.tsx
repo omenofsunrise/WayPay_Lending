@@ -166,30 +166,6 @@ const OfficesMap: React.FC = () => {
     }
   };
 
-    useEffect(() => {
-          const loadYandexMaps = () => {
-            if (window.ymaps) {
-            initMap();
-            return;
-            }
-
-            const script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
-            script.onload = () => {
-            window.ymaps.ready(initMap);
-            };
-            script.onerror = () => {
-            setError('Не удалось загрузить карту');
-            setIsLoading(false);
-            };
-            document.body.appendChild(script);
-        };
-
-        if (offices.length > 0 && !isLoading) {
-            loadYandexMaps();
-        }
-    }, [offices, isLoading]);
-
   const initMap = () => {
     if (!mapRef.current || !window.ymaps) return;
 
@@ -256,6 +232,30 @@ const OfficesMap: React.FC = () => {
           </div>
         `;
 
+            useEffect(() => {
+          const loadYandexMaps = () => {
+            if (window.ymaps) {
+            initMap();
+            return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
+            script.onload = () => {
+            window.ymaps.ready(initMap);
+            };
+            script.onerror = () => {
+            setError('Не удалось загрузить карту');
+            setIsLoading(false);
+            };
+            document.body.appendChild(script);
+        };
+
+        if (offices.length > 0 && !isLoading) {
+            loadYandexMaps();
+        }
+    }, [offices, isLoading, initMap]);
+    
 const placemark = new window.ymaps.Placemark([lat, lng], {
   hintContent: office.name,
   balloonContent: balloonContent,

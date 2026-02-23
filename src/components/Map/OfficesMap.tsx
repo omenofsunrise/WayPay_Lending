@@ -146,9 +146,6 @@ const OfficesMap: React.FC = () => {
   const yandexMapRef = useRef<any>(null);
   const placemarksRef = useRef<any[]>([]);
 
-  // Координаты Грозного (центр карты по умолчанию)
-  const GROZNY_COORDS = [43.3179, 45.6981];
-
   useEffect(() => {
     fetchOffices();
   }, []);
@@ -200,6 +197,7 @@ const OfficesMap: React.FC = () => {
 
   const initMap = useCallback(() => {
     if (!mapRef.current || !window.ymaps || offices.length === 0) return;
+    const GROZNY_COORDS = [43.3179, 45.6981];
 
     try {
       // Создаем карту
@@ -308,7 +306,7 @@ const OfficesMap: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [offices, getScheduleHTML, GROZNY_COORDS]);
+  }, [offices, getScheduleHTML]);
 
   useEffect(() => {
     const loadYandexMaps = () => {

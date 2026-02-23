@@ -13,6 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build project
+        run: |
+          npm run build
+
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
@@ -22,23 +35,17 @@ jobs:
           script: |
             echo "Starting deployment..."
             
-            # Сначала очищаем папку
-            echo "Cleaning /var/www/waypay..."
+            # Очищаем папку назначения
             rm -rf /var/www/waypay/*
             
-            # Создаем папку если она была удалена
-            mkdir -p /var/www/waypay
-            
             echo "Waiting for file transfer..."
-            
-          script_stop: true
-          
-      - name: Sync files via SCP
+
+      - name: Sync built files via SCP
         uses: appleboy/scp-action@master
         with:
           host: 89.104.69.24
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./"
+          source: "build/*"
           target: "/var/www/waypay"
           strip_components: 1

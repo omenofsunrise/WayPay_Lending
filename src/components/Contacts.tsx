@@ -61,16 +61,6 @@ const PhoneLink = styled.a`
   }
 `;
 
-const AdditionalInfo = styled.p`
-  font-size: 16px;
-  color: #888;
-  margin-top: 20px;
-  
-  ${media.down('sm')} {
-    font-size: 14px;
-  }
-`;
-
 const Contacts = () => {
   return (
     <SimpleContactSection id="simple-contacts">

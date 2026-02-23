@@ -128,7 +128,6 @@ const Prices: React.FC = () => {
 
   const handleSubmit = useCallback((data: FormData) => {
     console.log('Заявка на акцию:', data);
-    // Здесь можно добавить отправку данных на сервер
     handleCloseModal();
   }, [handleCloseModal]);
 
@@ -137,7 +136,6 @@ const Prices: React.FC = () => {
       <Title>Тарифы</Title>
       
       <PricingContainer>
-        {/* Ежемесячный тариф */}
         <PricingBox aria-label="Ежемесячный тариф">
           <PriceContainer>
             <Price>{PRICES.MONTHLY}</Price>
@@ -145,7 +143,6 @@ const Prices: React.FC = () => {
           </PriceContainer>
         </PricingBox>
 
-        {/* Промо-тариф */}
         <PricingBox 
           $isPromo 
           aria-label="Акционный тариф"
@@ -164,7 +161,6 @@ const Prices: React.FC = () => {
           </ApplyButton>
         </PricingBox>
 
-        {/* Годовой тариф */}
         <PricingBox aria-label="Годовой тариф">
           <PriceContainer>
             <Price>{PRICES.YEARLY}</Price>

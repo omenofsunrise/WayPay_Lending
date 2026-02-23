@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { media } from '../../styles/breakpoints';
 
-// Анимации
 const float = keyframes`
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -351,12 +350,10 @@ const Hero: React.FC = () => {
   useEffect(() => {
     if (particlesRef.current) {
       const particles = particlesRef.current;
-      // Clear existing particles first
       while (particles.firstChild) {
         particles.removeChild(particles.firstChild);
       }
       
-      // Уменьшаем количество частиц на мобильных
       const particleCount = window.innerWidth < 768 ? 10 : 20;
       
       for (let i = 0; i < particleCount; i++) {
@@ -393,7 +390,6 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer>
-      {/* Фоновые элементы */}
       <FloatingShape size={300} top="10%" left="5%" delay={0} duration={8} />
       <FloatingShape size={200} top="60%" left="15%" delay={2} duration={6} reverse />
       <FloatingShape size={400} top="20%" left="80%" delay={1} duration={10} />

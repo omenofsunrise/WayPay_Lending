@@ -11,6 +11,7 @@ import Mobile from './components/Mobile/Mobile';
 import Prices from './components/Prices/Prices';
 import { ScrollProvider, useScroll } from './contexts/ScrollContext';
 import Contacts from './components/Contacts';
+import OfficesMap from './components/Map/OfficesMap';
 
 const MainPage: React.FC = () => {
   const { sections } = useScroll();
@@ -36,6 +37,9 @@ const MainPage: React.FC = () => {
           <Contacts />
         </div>
         <RequestForm />
+        <div >
+          <OfficesMap />
+        </div>
       </div>
       <Footer />
     </>

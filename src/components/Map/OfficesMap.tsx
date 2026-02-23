@@ -166,29 +166,29 @@ const OfficesMap: React.FC = () => {
     }
   };
 
-  const loadYandexMaps = () => {
-    if (window.ymaps) {
-      initMap();
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
-    script.onload = () => {
-      window.ymaps.ready(initMap);
-    };
-    script.onerror = () => {
-      setError('Не удалось загрузить карту');
-      setIsLoading(false);
-    };
-    document.body.appendChild(script);
-  };
-
     useEffect(() => {
+          const loadYandexMaps = () => {
+            if (window.ymaps) {
+            initMap();
+            return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://api-maps.yandex.ru/2.1/?apikey=d1a60f70-3b70-4cac-8d38-50144a64a394&lang=ru_RU';
+            script.onload = () => {
+            window.ymaps.ready(initMap);
+            };
+            script.onerror = () => {
+            setError('Не удалось загрузить карту');
+            setIsLoading(false);
+            };
+            document.body.appendChild(script);
+        };
+
         if (offices.length > 0 && !isLoading) {
             loadYandexMaps();
         }
-    }, [offices, isLoading, loadYandexMaps]);
+    }, [offices, isLoading]);
 
   const initMap = () => {
     if (!mapRef.current || !window.ymaps) return;

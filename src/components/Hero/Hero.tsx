@@ -235,21 +235,21 @@ const ImageContainer = styled.div`
   }
 `;
 
-const MacbookDesktop = styled.img`
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
-  transition: transform 0.3s ease;
+// const MacbookDesktop = styled.img`
+//   max-width: 100%;
+//   height: auto;
+//   border-radius: 8px;
+//   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+//   transition: transform 0.3s ease;
   
-  &:hover {
-    transform: scale(1.02) translateY(-5px);
-  }
+//   &:hover {
+//     transform: scale(1.02) translateY(-5px);
+//   }
   
-  ${media.down('sm')} {
-    display: none;
-  }
-`;
+//   ${media.down('sm')} {
+//     display: none;
+//   }
+// `;
 
 const MacbookMobile = styled.img`
   display: nonedisplay: block;

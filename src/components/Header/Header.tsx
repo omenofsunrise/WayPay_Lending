@@ -262,10 +262,6 @@ const Header: React.FC<HeaderProps> = ({
     console.log('Данные формы:', data);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   const handleNavClick = (section: string) => {
     scrollToSection(section);
     setIsMenuOpen(false);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { media } from '../../styles/breakpoints';
 import Button from '../ui/buttons/Button';
@@ -71,7 +71,7 @@ const NavContainer = styled.nav`
     gap: 24px;
   }
   
-  ${media.down('sm')} {
+  ${media.down('md')} {
     display: none;
   }
 `;
@@ -86,6 +86,7 @@ const NavButton = styled.button`
   padding: 8px 12px;
   border-radius: 6px;
   transition: all 0.2s ease;
+  white-space: nowrap;
   
   &:hover {
     background-color: rgba(45, 52, 54, 0.05);
@@ -96,11 +97,19 @@ const NavButton = styled.button`
   }
 
   @media (max-width: 1350px) {
-    font-size: 15px;
+    font-size: 16px;
+    padding: 6px 10px;
   }
 
   @media (max-width: 1250px) {
-    display: none;
+    font-size: 15px;
+    padding: 5px 8px;
+  }
+
+  @media (max-width: 1150px) {
+    font-size: 14px;
+    padding: 4px 6px;
+    gap: 16px;
   }
 `;
 
@@ -108,9 +117,19 @@ const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 120px;
+  gap: 12px;
+  
+  ${media.down('xl')} {
+    margin-right: 80px;
+    gap: 8px;
+  }
+  
+  ${media.down('lg')} {
+    margin-right: 60px;
+  }
   
   ${media.down('xm')} {
-    margin-right: 60px;
+    margin-right: 40px;
   }
   
   ${media.down('sm')} {
@@ -124,7 +143,24 @@ const ApplyButton = styled(Button)`
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
   box-shadow: none;
-  font-size: 20px;
+  font-size: 18px;
+  padding: 8px 16px;
+  white-space: nowrap;
+
+  @media (max-width: 1350px) {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 1250px) {
+    font-size: 15px;
+    padding: 5px 10px;
+  }
+
+  @media (max-width: 1150px) {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
@@ -132,11 +168,42 @@ const ApplyButton = styled(Button)`
 `;
 
 const PhoneButton = styled(Button)`
-  margin-right: 10px;
+  margin-right: 0;
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1350px) {
+    min-width: 40px;
+    height: 40px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    min-width: 36px;
+    height: 36px;
+    
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 
   ${media.down('sm')} {
     margin-top: 55px;
-    margin-right: 0;
+    min-width: 44px;
+    height: 44px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
 
@@ -168,7 +235,7 @@ const Header: React.FC<HeaderProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollToSection } = useScroll();
   
-  React.useEffect(() => {
+  useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };

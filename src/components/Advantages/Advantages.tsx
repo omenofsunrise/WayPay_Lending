@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InfoCard from './InfoCard';
 import Title from '../ui/Title';
@@ -6,7 +6,6 @@ import Layout from '../ui/Layout';
 import { media } from '../../styles/breakpoints';
 
 const SectionContainer = styled.section`
-
   ${media.down('sm')} {
     margin: 30px 20px;
   }
@@ -31,9 +30,11 @@ const DollarIcon = () => (
 );
 
 const ClientsIcon = () => (
+  <div style={{ position: 'relative', display: 'inline-block' }}>
     <svg width="110" height="76" viewBox="0 0 110 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M79.3749 38C86.8499 38 92.8624 31.9334 92.8624 24.4584C92.8624 16.9834 86.8499 10.9167 79.3749 10.9167C71.8999 10.9167 65.8333 16.9834 65.8333 24.4584C65.8333 31.9334 71.8999 38 79.3749 38ZM38.7499 32.5834C47.7416 32.5834 54.9457 25.325 54.9457 16.3334C54.9457 7.34171 47.7416 0.083374 38.7499 0.083374C29.7583 0.083374 22.4999 7.34171 22.4999 16.3334C22.4999 25.325 29.7583 32.5834 38.7499 32.5834ZM79.3749 48.8334C69.4624 48.8334 49.5833 53.8167 49.5833 63.7292V75.9167H109.167V63.7292C109.167 53.8167 89.2874 48.8334 79.3749 48.8334ZM38.7499 43.4167C26.1291 43.4167 0.833252 49.7542 0.833252 62.375V75.9167H38.7499V63.7292C38.7499 59.125 40.5374 51.0542 51.5874 44.9334C46.8749 43.9584 42.3249 43.4167 38.7499 43.4167Z" fill="#007D88"/>
+      <path d="M79.3749 38C86.8499 38 92.8624 31.9334 92.8624 24.4584C92.8624 16.9834 86.8499 10.9167 79.3749 10.9167C71.8999 10.9167 65.8333 16.9834 65.8333 24.4584C65.8333 31.9334 71.8999 38 79.3749 38ZM38.7499 32.5834C47.7416 32.5834 54.9457 25.325 54.9457 16.3334C54.9457 7.34171 47.7416 0.083374 38.7499 0.083374C29.7583 0.083374 22.4999 7.34171 22.4999 16.3334C22.4999 25.325 29.7583 32.5834 38.7499 32.5834ZM79.3749 48.8334C69.4624 48.8334 49.5833 53.8167 49.5833 63.7292V75.9167H109.167V63.7292C109.167 53.8167 89.2874 48.8334 79.3749 48.8334ZM38.7499 43.4167C26.1291 43.4167 0.833252 49.7542 0.833252 62.375V75.9167H38.7499V63.7292C38.7499 59.125 40.5374 51.0542 51.5874 44.9334C46.8749 43.9584 42.3249 43.4167 38.7499 43.4167Z" fill="#007D88"/>
     </svg>
+  </div>
 );
 
 const CalculatorIcon = () => (
@@ -62,15 +63,15 @@ const TeamIcon = () => (
     </svg>
 );
 
-const advantagesData = [
+const advantagesData = (clientsCount?: number) => [
   {
     title: "Учёт рассрочек",
     description: "Безопасное хранение информации о рассрочках. Отслеживание статусов платежей и остатков по договорам",
     icon: <DollarIcon />
   },
   {
-    title: "База клиентов",
-    description: "Общая база данных клиентов с системой чёрных списков. Просмотр активных договоров и сроков их погашения",
+    title: (`База клиентов клиентов`),
+    description: `Общая база данных насчитывает ${clientsCount} клиентов с системой чёрных списков. Просмотр активных договоров и сроков их погашения`,
     icon: <ClientsIcon />
   },
   {
@@ -96,14 +97,44 @@ const advantagesData = [
 ];
 
 const Advantages: React.FC = () => {
+  const [clientsCount, setClientsCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchClientsCount = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('https://web.waypay.one:5001/api/client/count');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        setClientsCount(data);
+        setError(null);
+      } catch (err) {
+        setError('Не удалось загрузить количество клиентов');
+        console.error('Error fetching clients count:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClientsCount();
+  }, []);
+
   return (
     <Layout>
       <SectionContainer>
         <Title>
           Почему стоит выбрать WayPay?
+          {loading && <span style={{ fontSize: '16px', marginLeft: '12px', color: '#666' }}>Загрузка...</span>}
+          {error && <span style={{ fontSize: '14px', marginLeft: '12px', color: 'red' }}>{error}</span>}
         </Title>
         <AdvantagesGrid>
-          {advantagesData.map((advantage, index) => (
+          {advantagesData(clientsCount ?? undefined).map((advantage, index) => (
             <InfoCard
               key={index}
               icon={advantage.icon}

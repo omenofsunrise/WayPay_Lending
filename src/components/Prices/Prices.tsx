@@ -13,7 +13,7 @@ const PRICES = {
   PROMO: 'Бесплатно'
 } as const;
 
-const PROMO_DESCRIPTION = 'Компаниям, которые впервые подключают нашу информационную систему — 2 месяца бесплатно';
+const PROMO_DESCRIPTION = 'Компаниям, которые впервые подключают нашу информационную систему — 10 дней бесплатно';
 
 // Стилизованные компоненты
 const PricingContainer = styled.section`

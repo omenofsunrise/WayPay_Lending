@@ -153,12 +153,6 @@ const OfficesMap: React.FC = () => {
     fetchOffices();
   }, []);
 
-  useEffect(() => {
-    if (offices.length > 0 && !isLoading) {
-      loadYandexMaps();
-    }
-  }, [offices]);
-
   const fetchOffices = async () => {
     try {
       const response = await fetch('https://web.waypay.one:5001/api/Branch/nearest?maxDistance=50000');
@@ -189,6 +183,12 @@ const OfficesMap: React.FC = () => {
     };
     document.body.appendChild(script);
   };
+
+    useEffect(() => {
+        if (offices.length > 0 && !isLoading) {
+            loadYandexMaps();
+        }
+    }, [offices, isLoading, loadYandexMaps]);
 
   const initMap = () => {
     if (!mapRef.current || !window.ymaps) return;

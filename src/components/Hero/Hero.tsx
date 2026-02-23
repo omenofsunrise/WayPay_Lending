@@ -253,7 +253,7 @@ const MacbookDesktop = styled.img`
 `;
 
 const MacbookMobile = styled.img`
-  display: none;
+  display: nonedisplay: block;
   max-width: 100%;
   height: auto;
   border-radius: 8px;
@@ -264,7 +264,6 @@ const MacbookMobile = styled.img`
   }
   
   ${media.down('sm')} {
-    display: block;
     max-width: 90%;
     margin: 0 auto;
   }
@@ -412,7 +411,7 @@ const Hero: React.FC = () => {
       
       <HeroContent>
         <ImageContainer onClick={handleMacbookClick}>
-          <MacbookDesktop src="/Images/macbook-pro.png" alt="WayPay на Macbook Pro" />
+          {/* <MacbookDesktop src="/Images/macbook-pro.png" alt="WayPay на Macbook Pro" /> */}
           <MacbookMobile src="/Images/cut-macbook-pro.png" alt="WayPay на мобильном" />
         </ImageContainer>
         

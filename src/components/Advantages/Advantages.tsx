@@ -63,6 +63,14 @@ const TeamIcon = () => (
     </svg>
 );
 
+function formatClientCount(count: number | undefined) {
+  if (count === undefined || count === null) {
+    return '0';
+  }
+  
+  return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
 const advantagesData = (clientsCount?: number) => [
   {
     title: "Учёт рассрочек",
@@ -71,7 +79,7 @@ const advantagesData = (clientsCount?: number) => [
   },
   {
     title: (`База клиентов клиентов`),
-    description: `Общая база данных насчитывает ${clientsCount} клиентов с системой чёрных списков. Просмотр активных договоров и сроков их погашения`,
+    description: `Общая база данных насчитывает ${formatClientCount(clientsCount)} клиентов с системой чёрных списков. Просмотр активных договоров и сроков их погашения`,
     icon: <ClientsIcon />
   },
   {

@@ -308,7 +308,7 @@ const OfficesMap: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [offices, getScheduleHTML]);
+  }, [offices, getScheduleHTML, GROZNY_COORDS]);
 
   useEffect(() => {
     const loadYandexMaps = () => {
@@ -339,7 +339,7 @@ const OfficesMap: React.FC = () => {
       <MapContent>
         <Title>Нами пользуются</Title>
         <Description>
-            
+
         </Description>
         
         <div style={{ position: 'relative' }}>

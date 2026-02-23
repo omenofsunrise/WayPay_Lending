@@ -78,7 +78,7 @@ const advantagesData = (clientsCount?: number) => [
     icon: <DollarIcon />
   },
   {
-    title: (`База клиентов клиентов`),
+    title: (`Огромная база клиентов`),
     description: `Общая база данных насчитывает ${formatClientCount(clientsCount)} клиентов с системой чёрных списков. Просмотр активных договоров и сроков их погашения`,
     icon: <ClientsIcon />
   },

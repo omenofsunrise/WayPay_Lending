@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Title from '../ui/Title';
 import Layout from '../ui/Layout';
@@ -6,7 +6,17 @@ import Button from '../ui/buttons/Button';
 import RequestModal from '../ui/Request';
 import { media } from '../../styles/breakpoints';
 
-const PricingContainer = styled.div`
+// Константы для цен и акции
+const PRICES = {
+  MONTHLY: '5 000 ₽',
+  YEARLY: '60 000 ₽',
+  PROMO: 'Бесплатно'
+} as const;
+
+const PROMO_DESCRIPTION = 'Компаниям, которые впервые подключают нашу информационную систему — 2 месяца бесплатно';
+
+// Стилизованные компоненты
+const PricingContainer = styled.section`
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -19,7 +29,7 @@ const PricingContainer = styled.div`
   }
 `;
 
-const PricingBox = styled.div<{ $isPromo?: boolean }>`
+const PricingBox = styled.article<{ $isPromo?: boolean }>`
   border: ${props => props.$isPromo ? 'none' : '1px solid #2BA5AD'};
   border-radius: 20px;
   padding: 24px;
@@ -32,6 +42,7 @@ const PricingBox = styled.div<{ $isPromo?: boolean }>`
   color: ${props => props.$isPromo ? 'white' : 'inherit'};
   box-shadow: ${props => props.$isPromo ? '0 8px 20px rgba(43, 165, 173, 0.3)' : 'none'};
   transform: ${props => props.$isPromo ? 'scale(1.05)' : 'none'};
+  transition: all 0.3s ease;
   
   ${media.down('sm')} {
     width: 70%;
@@ -40,8 +51,8 @@ const PricingBox = styled.div<{ $isPromo?: boolean }>`
 
 const PromoBadge = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
+  right: 12px;
   background-color: white;
   color: #2BA5AD;
   font-size: 12px;
@@ -51,124 +62,113 @@ const PromoBadge = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 `;
 
-const PriceContainer = styled.div<{ $isPromo?: boolean }>`
-    margin: auto 0;
+const PriceContainer = styled.div`
+  margin: auto 0;
 `;
 
 const Price = styled.div`
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
+  line-height: 1.2;
 `;
 
 const Period = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   opacity: 0.8;
-`;
-
-const DaysLeft = styled.div`
-  font-size: 25px;
-  margin: 80px 0;
   text-align: center;
-
-  ${media.down('sm')} {
-    font-size: 17px;
-  }
-`;
-
-const PromoTitle = styled.h3`
-  font-size: 20px;
-  margin: 10px 0;
-  text-align: center;
-
-  ${media.down('sm')} {
-    font-size: 17px;
-  }
 `;
 
 const PromoDescription = styled.p`
-  font-size: 14px;
+  font-size: 20px;
+  margin: 40px 0 60px;
   text-align: center;
-  margin-bottom: 0;
-  line-height: 1.5;
+  font-weight: 500;
+  line-height: 1.4;
 
   ${media.down('sm')} {
-    font-size: 13px;
+    font-size: 17px;
+    margin: 30px 0 40px;
   }
 `;
 
 const ApplyButton = styled(Button)`
-  background: none;
-  border: 1px solid #FFFFFF;
+  background: transparent;
+  border: 2px solid #FFFFFF;
   color: #FFFFFF;
-  box-shadow: none;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 24px;
   margin: 0 20px 15px;
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: white !important;
+    color: #2BA5AD !important;
+    transform: translateY(-2px);
   }  
 `;
+
+// Типы
+interface FormData {
+  fullName: string;
+  email: string;
+  phone: string;
+}
 
 const Prices: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const calculateDaysLeft = () => {
-    const today = new Date();
-    const nextYear = today.getFullYear() + 1;
-    const targetDate = new Date(nextYear, 0, 1);
-    const timeDiff = targetDate.getTime() - today.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
-  };
-
-  const daysLeft = calculateDaysLeft();
-
-  const handleApply = () => {
+  const handleApply = useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
-  const handleSubmit = (data: {
-    fullName: string;
-    email: string;
-    phone: string;
-  }) => {
-    console.log('Данные формы:', data);
-  };
+  const handleSubmit = useCallback((data: FormData) => {
+    console.log('Заявка на акцию:', data);
+    // Здесь можно добавить отправку данных на сервер
+    handleCloseModal();
+  }, [handleCloseModal]);
 
   return (
     <Layout>
       <Title>Тарифы</Title>
+      
       <PricingContainer>
-        <PricingBox>
+        {/* Ежемесячный тариф */}
+        <PricingBox aria-label="Ежемесячный тариф">
           <PriceContainer>
-                <Price>5 000 ₽</Price>
-                <Period>в месяц</Period>
+            <Price>{PRICES.MONTHLY}</Price>
+            <Period>в месяц</Period>
           </PriceContainer>
         </PricingBox>
 
-        <PricingBox $isPromo>
-          <PromoBadge>Акция</PromoBadge>
-          <PromoTitle>Бесплатно</PromoTitle>
+        {/* Промо-тариф */}
+        <PricingBox 
+          $isPromo 
+          aria-label="Акционный тариф"
+          role="complementary"
+        >
+          <PromoBadge aria-label="Акция">Акция</PromoBadge>
+          <Price>{PRICES.PROMO}</Price>
           <PromoDescription>
-            Все компании зарегистрировавшиеся до 1 января получат 2 месяца бесплатно
+            {PROMO_DESCRIPTION}
           </PromoDescription>
-          <DaysLeft>Осталось {daysLeft} дней до конца акции</DaysLeft>
           <ApplyButton 
             onClick={handleApply}
-            backgroundColor="white"
-            textColor="#2BA5AD"
+            aria-label="Оставить заявку на акционный тариф"
           >
             Оставить заявку
           </ApplyButton>
         </PricingBox>
 
-        <PricingBox>
+        {/* Годовой тариф */}
+        <PricingBox aria-label="Годовой тариф">
           <PriceContainer>
-                <Price>60 000 ₽</Price>
-                <Period>в год</Period>
+            <Price>{PRICES.YEARLY}</Price>
+            <Period>в год</Period>
           </PriceContainer>
         </PricingBox>
       </PricingContainer>

@@ -1,4 +1,4 @@
-import React, { createContext, use, useContext, useRef } from 'react';
+import React, { createContext, useContext, useRef } from 'react';
 
 interface ScrollContextType {
   sections: {

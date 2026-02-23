@@ -166,35 +166,31 @@ const OfficesMap: React.FC = () => {
     }
   };
 
-  const initMap = () => {
-    if (!mapRef.current || !window.ymaps) return;
+    const initMap = () => {
+        if (!mapRef.current || !window.ymaps) return;
 
-    try {
-      // Создаем карту
-      yandexMapRef.current = new window.ymaps.Map(mapRef.current, {
-        center: GROZNY_COORDS,
-        zoom: 10,
-        controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
-      });
+        try {
+            // Создаем карту
+            yandexMapRef.current = new window.ymaps.Map(mapRef.current, {
+            center: GROZNY_COORDS,
+            zoom: 10,
+            controls: ['zoomControl', 'fullscreenControl', 'geolocationControl']
+            });
 
+            const clusterer = new window.ymaps.Clusterer({
+                preset: 'islands#invertedVioletClusterIcons',
+                clusterIconColor: '#2CA5AD',
+                clusterDisableClickZoom: false,
+                groupByCoordinates: false,
+                clusterOpenBalloonOnClick: true,
+                clusterIconContentLayout: window.ymaps.templateLayoutFactory.createClass(
+                    '<div style="color: white; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">{{ properties.geoObjects.length }}</div>'
+                ),
+            });
 
-      // Добавляем кластеризатор для красивой группировки меток
-      const clusterer = new window.ymaps.Clusterer({
-        preset: 'islands#invertedVioletClusterIcons',
-        clusterIconColor: '#2CA5AD',
-        clusterDisableClickZoom: false,
-        groupByCoordinates: false,
-        clusterOpenBalloonOnClick: true,
-        clusterIconContentLayout: window.ymaps.templateLayoutFactory.createClass(
-          '<div style="color: white; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">{{ properties.geoObjects.length }}</div>'
-        ),
-      });
-
-      // Создаем метки для каждого офиса
       const placemarks = offices.map((office, index) => {
         const [lat, lng] = office.coordinates.split(',').map(coord => parseFloat(coord.trim()));
         
-        // Создаем контент для балуна
         const balloonContent = `
           <div style="padding: 20px; max-width: 280px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
@@ -232,8 +228,8 @@ const OfficesMap: React.FC = () => {
           </div>
         `;
 
-            useEffect(() => {
-          const loadYandexMaps = () => {
+    useEffect(() => {
+        const loadYandexMaps = () => {
             if (window.ymaps) {
             initMap();
             return;
@@ -255,7 +251,7 @@ const OfficesMap: React.FC = () => {
             loadYandexMaps();
         }
     }, [offices, isLoading, initMap]);
-    
+
 const placemark = new window.ymaps.Placemark([lat, lng], {
   hintContent: office.name,
   balloonContent: balloonContent,

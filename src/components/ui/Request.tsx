@@ -190,11 +190,6 @@ const ContactLink = styled.a`
   }
 `;
 
-const Icon = styled.span`
-  margin-right: 8px;
-  font-size: 1.2rem;
-`;
-
 const IconWrapper = styled.span`
   display: inline-flex;
   align-items: center;

@@ -232,7 +232,6 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollToSection } = useScroll();
   
   useEffect(() => {
@@ -264,7 +263,6 @@ const Header: React.FC<HeaderProps> = ({
 
   const handleNavClick = (section: string) => {
     scrollToSection(section);
-    setIsMenuOpen(false);
   };
 
   return (

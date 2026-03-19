@@ -165,8 +165,157 @@ const FeatureDescription = styled.p`
   }
 `;
 
+const DownloadSection = styled.div`
+  margin-top: 30px;
+  
+  ${media.down('sm')} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+`;
+
+const DownloadTitle = styled.h4`
+  font-size: 20px;
+  font-weight: 600;
+  color: #05909C;
+  margin-bottom: 15px;
+  
+  ${media.down('sm')} {
+    text-align: center;
+    width: 100%;
+  }
+`;
+
+const DownloadGroup = styled.div<{ $isMobile?: boolean }>`
+  margin-bottom: 25px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  ${({ $isMobile }) => $isMobile && `
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `}
+`;
+
+const DownloadGroupTitle = styled.h5`
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  
+  ${media.down('sm')} {
+    text-align: center;
+    padding-left: 0;
+  }
+`;
+
+const DownloadButtons = styled.div<{ $isMobile?: boolean }>`
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  
+  ${({ $isMobile }) => $isMobile && `
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    
+    @media (min-width: 411px) {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  `}
+`;
+
+const PWALink = styled.a`
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #05909C 0%, #03707A 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(5, 144, 156, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5, 144, 156, 0.4);
+  }
+`;
+
+const APKDownloadBox = styled(DownloadBox)`
+  cursor: pointer;
+`;
+
 const Mobile: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: parseInt(breakpoints.sm) });
+
+  const handleAPKDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/downloads/waypay-android.apk';
+    link.download = 'waypay-android.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const DownloadButtonsComponent = ({ isMobileView = false }) => (
+    <div style={{ display: "flex", justifyContent: isMobileView ? "center" : "flex-start", flexWrap: "wrap" }}>
+      <DownloadGroup $isMobile={isMobileView}>
+        <DownloadGroupTitle>Веб-версия</DownloadGroupTitle>
+        <DownloadButtons $isMobile={isMobileView}>
+          <DownloadBox
+            title='Клиентам'
+            iconSrc="/Logos/markets/AppStore.svg"
+            platformName="Сайт"
+            onClick={() => window.open('https://client.waypay.one', '_blank')}
+          />
+        </DownloadButtons>
+      </DownloadGroup>
+
+      <DownloadGroup $isMobile={isMobileView}>
+        <DownloadGroupTitle>Мобильные приложения</DownloadGroupTitle>
+        <DownloadButtons $isMobile={isMobileView}>
+          <DownloadBox
+            title='Сотрудникам'
+            iconSrc="/Logos/markets/AppStore.svg"
+            platformName="App Store"
+            onClick={() => window.open('https://apps.apple.com/us/app/waypay/id6752306977', '_blank')}
+          />
+
+          <APKDownloadBox
+            title='Сотрудникам'
+            iconSrc="/Logos/markets/download.svg"
+            platformName="APK для Android"
+            onClick={handleAPKDownload}
+          />
+
+          <DownloadBox
+            title='Сотрудникам'
+            iconSrc="/Logos/markets/Rustore.svg"
+            platformName="RuStore"
+            onClick={() => window.open('https://www.rustore.ru/catalog/app/one.waypay.mobile', '_blank')}
+          />
+
+          <DownloadBox
+            title='Клиентам'
+            iconSrc="/Logos/markets/Rustore.svg"
+            platformName="RuStore"
+            onClick={() => window.open('https://www.rustore.ru/catalog/app/com.waypay.waypay_client', '_blank')}
+          />
+        </DownloadButtons>
+      </DownloadGroup>
+    </div>
+  );
 
   if (isMobile) {
     return (
@@ -204,25 +353,11 @@ const Mobile: React.FC = () => {
                 <FeatureDescription>Появилась срочная задача? За 30 секунд создайте ее и назначьте нужному менеджеру, указав дедлайн и приоритет.</FeatureDescription>
               </FeatureBox>
             </FeaturesGrid>
-            <div style={{ 
-              display: "flex", 
-              gap: "20px", 
-              flexDirection: window.innerWidth <= 410 ? "column" : "row",
-              alignItems: window.innerWidth <= 410 ? "center" : "flex-start"
-            }}>
-              <DownloadBox
-                iconSrc="/Logos/markets/AppStore.svg" 
-                platformName="App Store"
-                onClick={() => window.open('https://apps.apple.com/us/app/waypay/id6752306977', '_blank')}
-              />
-            <div style={{ marginLeft: window.innerWidth <= 410 ? 0 : "auto" }}>
-                <DownloadBox 
-                  iconSrc="/Logos/markets/Rustore.svg" 
-                  platformName="RuStore"
-                  onClick={() => window.open('https://www.rustore.ru/catalog/app/one.waypay.mobile', '_blank')}
-                />
-              </div>
-            </div>
+            
+            <DownloadSection>
+              <DownloadTitle>Скачать приложение:</DownloadTitle>
+              <DownloadButtonsComponent isMobileView={true} />
+            </DownloadSection>
           </ContentContainer>
         </HeroContent>
       </HeroContainer>
@@ -267,25 +402,11 @@ const Mobile: React.FC = () => {
             </FeaturesGrid>
             
             <MainText>Ваш офис в кармане. <br />Работайте с клиентами там, где вам удобно.</MainText>
-            <div style={{ display: "flex", gap: "38px"}}>
-              {/* <DownloadBox 
-                iconSrc="/Logos/markets/GooglePlay.svg" 
-                platformName="Google Play"
-                onClick={() => window.open('https://apps.apple.com/your-app-link', '_blank')}
-              /> */}
-
-              <DownloadBox
-                iconSrc="/Logos/markets/AppStore.svg" 
-                platformName="App Store"
-                onClick={() => window.open('https://apps.apple.com/us/app/waypay/id6752306977', '_blank')}
-              />
-
-              <DownloadBox 
-                iconSrc="/Logos/markets/Rustore.svg" 
-                platformName="RuStore"
-                onClick={() => window.open('https://www.rustore.ru/catalog/app/one.waypay.mobile', '_blank')}
-              />
-            </div>
+            
+            <DownloadSection>
+              <DownloadTitle>Скачать приложение:</DownloadTitle>
+              <DownloadButtonsComponent />
+            </DownloadSection>
           </ContentContainer>
         </HeroContent>
       </HeroContainer>

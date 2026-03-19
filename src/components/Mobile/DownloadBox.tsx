@@ -106,21 +106,23 @@ interface DownloadBoxProps {
   platformName: string;
   onClick?: () => void;
   className?: string;
+  title?: string;
 }
 
 const DownloadBox: React.FC<DownloadBoxProps> = ({ 
   iconSrc, 
   platformName, 
   onClick,
-  className 
+  className,
+  title = 'Скачать в'
 }) => {
   return (
     <DownloadBoxContainer onClick={onClick} className={className}>
       <IconWrapper>
-        <Icon src={iconSrc} alt={`Скачать в ${platformName}`} />
+        <Icon src={iconSrc} alt={`${title} ${platformName}`} />
       </IconWrapper>
       <TextContainer>
-        <DownloadText>Скачать в</DownloadText>
+        <DownloadText>{title}</DownloadText>
         <PlatformText>{platformName}</PlatformText>
       </TextContainer>
     </DownloadBoxContainer>

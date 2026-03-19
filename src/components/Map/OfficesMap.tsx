@@ -335,7 +335,7 @@ const OfficesMap: React.FC = () => {
   return (
     <MapContainer id="offices">
       <MapContent>
-        <Title>Нами пользуются</Title>
+        <Title>Пользователи WayPay CRM</Title>
         <Description>
 
         </Description>

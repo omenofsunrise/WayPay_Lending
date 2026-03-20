@@ -234,24 +234,6 @@ const DownloadButtons = styled.div<{ $isMobile?: boolean }>`
   `}
 `;
 
-const PWALink = styled.a`
-  display: inline-block;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #05909C 0%, #03707A 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(5, 144, 156, 0.3);
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(5, 144, 156, 0.4);
-  }
-`;
-
 const APKDownloadBox = styled(DownloadBox)`
   cursor: pointer;
 `;

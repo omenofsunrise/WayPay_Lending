@@ -201,6 +201,16 @@ const DownloadGroup = styled.div<{ $isMobile?: boolean }>`
     flex-direction: column;
     align-items: center;
   `}
+  
+  // Добавляем отступ между группами на десктопе
+  &:first-of-type {
+    margin-right: 40px;
+    
+    ${media.down('sm')} {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+  }
 `;
 
 const DownloadGroupTitle = styled.h5`

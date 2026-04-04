@@ -128,12 +128,39 @@ const Divider = styled.div`
   margin: 10px 0;
 `;
 
+const CompanyInfoGrid = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 30px;
+  margin: 20px auto 0;
+  padding: 0 0 10px 0;
+  font-size: 14px;
+  color: rgba(80, 85, 92, 0.9);
+
+  ${media.down('sm')} {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const CompanyInfoItem = styled.span`
+  line-height: 1.4;
+`;
+
 const BottomSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px auto 30px;
-  padding-top: 20px;
+  margin: 10px auto 30px;
+  padding-top: 10px;
   color: rgba(80, 85, 92, 1);
   flex-wrap: wrap;
   gap: 20px;
@@ -229,12 +256,23 @@ const Footer: React.FC = () => {
               <PhoneIcon />
               +7 (989) 920-20-20
             </ContactItem>
-            <ContactItem href="mailto:ya@eliphanov.ru">
+            <ContactItem href="mailto:info@waypay.one">
               <EmailIcon />
-              ya@eliphanov.ru
+              info@waypay.one
             </ContactItem>
           </ContactSection>
         </MainContent>
+
+        <CompanyInfoGrid>
+          <CompanyInfoItem>ИНН 200508036161</CompanyInfoItem>
+          <CompanyInfoItem>ОГРН 1252000002121</CompanyInfoItem>
+          <CompanyInfoItem>Директор: Элипханов И.С.</CompanyInfoItem>
+          <CompanyInfoItem>от 11 марта 2025 г.</CompanyInfoItem>
+        </CompanyInfoGrid>
+
+        <CompanyInfoGrid style={{ marginTop: 0 }}>
+          <CompanyInfoItem>366212, Чеченская Республика, Гудермесский р-н, г. Ойсхара, ул Чомака Ойшиева, двлд. 49 стр. 1</CompanyInfoItem>
+        </CompanyInfoGrid>
       </ContentWrapper>
 
       <Divider />

@@ -29,7 +29,7 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
-          host: 89.104.69.24
+          host: 144.31.249.120
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |

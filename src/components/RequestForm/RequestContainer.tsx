@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../ui/buttons/Button';
 import { media } from '../../styles/breakpoints';
+import {
+  getCooldownRemainingSeconds,
+  MIN_FORM_FILL_TIME_MS,
+  normalizeLead,
+  rememberSuccessfulSubmit,
+  validateLead,
+} from '../../utils/leadFormProtection';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -12,6 +19,16 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const HoneypotField = styled.div`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 `;
 
 const FieldGroup = styled.div`
@@ -165,12 +182,14 @@ interface ApiResponse {
 }
 
 const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className }) => {
+  const formOpenedAt = useRef(Date.now());
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     comment: ''
   });
+  const [website, setWebsite] = useState('');
   
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -178,8 +197,35 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setMessage(null);
+
+    if (website) {
+      setMessage({ text: 'Заявка успешно отправлена!', isError: false });
+      return;
+    }
+
+    if (Date.now() - formOpenedAt.current < MIN_FORM_FILL_TIME_MS) {
+      setMessage({ text: 'Пожалуйста, проверьте данные и повторите отправку.', isError: true });
+      return;
+    }
+
+    const validationError = validateLead(formData);
+    if (validationError) {
+      setMessage({ text: validationError, isError: true });
+      return;
+    }
+
+    const cooldown = getCooldownRemainingSeconds();
+    if (cooldown > 0) {
+      setMessage({
+        text: `Заявка уже отправлена. Повторите через ${cooldown} сек.`,
+        isError: true,
+      });
+      return;
+    }
+
+    const normalizedData = normalizeLead(formData);
+    setIsLoading(true);
 
     try {
       const response = await fetch('https://web.waypay.one:5002/api/Feedback/submit-application', {
@@ -188,7 +234,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
           'accept': '*/*',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(normalizedData)
       });
 
       if (response.ok) {
@@ -197,7 +243,9 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
           text: result.message || 'Заявка успешно отправлена!',
           isError: false
         });
+        rememberSuccessfulSubmit();
         setFormData({ fullName: '', email: '', phone: '', comment: '' });
+        formOpenedAt.current = Date.now();
       } else {
         const errorData = await response.json().catch(() => null);
         setMessage({
@@ -214,7 +262,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
       setIsLoading(false);
     }
 
-    onSubmit?.(formData);
+    onSubmit?.(normalizedData);
   };
 
   const handleInputChange = (field: keyof typeof formData) => (
@@ -237,6 +285,19 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
   return (
     <Container className={className}>
       <Form onSubmit={handleSubmit}>
+        <HoneypotField aria-hidden="true">
+          <label htmlFor="website">Сайт</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={e => setWebsite(e.target.value)}
+          />
+        </HoneypotField>
+
         <FieldGroup>
           <Label 
             htmlFor="fullName" 
@@ -253,6 +314,9 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
             onFocus={handleFocus('fullName')}
             onBlur={handleBlur}
             required
+            minLength={3}
+            maxLength={120}
+            autoComplete="name"
             disabled={isLoading}
           />
         </FieldGroup>
@@ -274,6 +338,8 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
               onFocus={handleFocus('email')}
               onBlur={handleBlur}
               required
+              maxLength={254}
+              autoComplete="email"
               disabled={isLoading}
             />
           </InlineFieldGroup>
@@ -294,6 +360,9 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
               onFocus={handleFocus('phone')}
               onBlur={handleBlur}
               required
+              inputMode="tel"
+              maxLength={24}
+              autoComplete="tel"
               disabled={isLoading}
             />
           </InlineFieldGroup>
@@ -315,6 +384,7 @@ const RequestContainer: React.FC<RequestContainerProps> = ({ onSubmit, className
             onFocus={handleFocus('comment')}
             onBlur={handleBlur}
             disabled={isLoading}
+            maxLength={500}
             rows={4}
           />
         </FieldGroup>
